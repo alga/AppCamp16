@@ -13,3 +13,6 @@
 
 # Local settings
 local.properties
+
+*.iml
+.idea/
