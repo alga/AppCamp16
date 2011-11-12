@@ -7,12 +7,19 @@ public class WasteCalculator {
     public static Waste calculate(Item item) {
         Waste result = new Waste();
         
-        double randomCoeff = (item.id % 10) / 10.0;
+        double randomCoeff = (item.id % 10 + 1) / 10.0;
+
+        Integer avgPrice = 30;
+        Integer avgWeight = 300;
         
-        Double r = item.category.getAvgPrice().doubleValue() * randomCoeff;
+        if (item.category != null) {
+            avgPrice = item.category.getAvgPrice();
+            avgWeight = item.category.getAvgWeight();
+        }
+        Double r = avgPrice.doubleValue() * randomCoeff;
         result.waterLiters = r.intValue();
 
-        r = item.category.getAvgWeight() * randomCoeff;
+        r = avgWeight / 1000.0 * 20 * randomCoeff;
 
         result.co2Kg = r.intValue();
         

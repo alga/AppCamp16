@@ -83,8 +83,8 @@ public class Trecias extends Activity
             
             Animation fadeInAnimation = AnimationUtils.loadAnimation(c, R.anim.fade_in);
            
-           // Item item = (Item) parent.getSelectedItem();
-           // wasteInfo.setText(WasteCalculator.calculate(item).toString());
+            Item item = (Item) parent.getSelectedItem();
+            wasteInfo.setText(WasteCalculator.calculate(item).toString());
             preview.startAnimation(fadeInAnimation);
             preview.setVisibility(View.VISIBLE);
             
