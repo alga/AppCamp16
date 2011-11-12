@@ -83,9 +83,9 @@ public class Trecias extends Activity
             ImageView imageView = new ImageView(mContext);
 
             imageView.setImageResource(mImageIds[position]);
-            imageView.setLayoutParams(new Gallery.LayoutParams(150, 100));
+            imageView.setLayoutParams(new Gallery.LayoutParams(200, 150));
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            imageView.setBackgroundResource(mGalleryItemBackground);
+//            imageView.setBackgroundResource(mGalleryItemBackground);
 
             return imageView;
         }
