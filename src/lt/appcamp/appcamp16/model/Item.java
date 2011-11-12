@@ -8,13 +8,22 @@ public class Item {
     public String url;
     public String photoUrl;
     public String thumbUrl;
-    public Bitmap bitmap;
+    public Bitmap thumbBitmap;
+    public Bitmap photoBitmap;
 
-    public Bitmap getBitmap() {
-        if(bitmap == null) {
-            bitmap = new HttpRetriever().retrieveBitmap(thumbUrl);
+    public Bitmap getThumbBitmap() {
+        if(thumbBitmap == null) {
+            thumbBitmap = new HttpRetriever().retrieveBitmap(thumbUrl);
         }
-        return bitmap;
+        return thumbBitmap;
+    }
+    
+    public Bitmap getPhotoBitmap() {
+        if(photoBitmap == null) {
+            photoBitmap = new HttpRetriever().retrieveBitmap(photoUrl);
+        }
+
+        return photoBitmap;
     }
     
 }
