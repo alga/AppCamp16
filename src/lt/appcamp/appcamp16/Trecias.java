@@ -33,7 +33,7 @@ public class Trecias extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trecias);
         
-        CoverFlow coverFlow = (CoverFlow) findViewById(R.id.gallery);
+        coverFlow = (CoverFlow) findViewById(R.id.gallery);
 
         category_id = getIntent().getExtras().getInt(CATEGORY_PARAM);
         
