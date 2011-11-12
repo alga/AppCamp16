@@ -8,11 +8,7 @@ import lt.appcamp.appcamp16.utils.WasteCalculator;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-<<<<<<< HEAD
 import android.os.AsyncTask;
-=======
-import android.graphics.Typeface;
->>>>>>> 6a6b7566635d120ef90b048bbba7d984fe79eda2
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
