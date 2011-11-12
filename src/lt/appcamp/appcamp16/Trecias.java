@@ -14,9 +14,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.util.Log;
 
 public class Trecias extends Activity
 {
+    public static final String CATEGORY_PARAM = "category_id";
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,7 +28,9 @@ public class Trecias extends Activity
 
         CoverFlow coverFlow = (CoverFlow) findViewById(R.id.gallery);
 
-        PhotoAdapter coverImageAdapter =  new PhotoAdapter(this);
+        int category_id = getIntent().getExtras().getInt(CATEGORY_PARAM);
+        Log.i("Trecias","got category " + new Integer(category_id).toString());
+        PhotoAdapter coverImageAdapter =  new PhotoAdapter(this, category_id);
         coverFlow.setAdapter(coverImageAdapter);
         
         coverFlow.setSpacing(-25);
