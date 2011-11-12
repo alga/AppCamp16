@@ -1,30 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout 
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/gallerylayout"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
 
-	<lt.appcamp.appcamp16.ui.CoverFlow 
-	    xmlns:android="http://schemas.android.com/apk/res/android" 
-	    android:id="@+id/gallery"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	/>
-
+    <LinearLayout
+		    android:orientation="vertical"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent">
+    
+	    <LinearLayout
+		    android:orientation="vertical"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    />
+	    
+	    
+		<lt.appcamp.appcamp16.ui.CoverFlow 
+		   	android:id="@+id/gallery"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+			/>
+		
+	</LinearLayout>
+	
+	
 	<RelativeLayout
 	    android:id="@+id/preview"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
+	    android:layout_centerInParent="true"
 	    android:visibility="gone"
 	    >
+	    
+	    	
 	    <ImageView
 			android:id="@+id/previewImage"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			/>
-	    
+
+	    <TextView
+	    	android:id="@+id/wasteInfo"
+	    	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:layout_alignParentLeft="true"
+	    	android:layout_marginLeft="54dp"
+	    	android:layout_marginTop="134dp"
+	    	android:text="xxxx"
+	    	android:textAppearance="?android:attr/textAppearanceLarge" />
+	    	    
 	  </RelativeLayout>
+
 	
 </RelativeLayout>
 

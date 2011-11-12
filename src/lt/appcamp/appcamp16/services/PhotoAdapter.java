@@ -2,7 +2,10 @@ package lt.appcamp.appcamp16.services;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -19,12 +22,6 @@ public class PhotoAdapter extends BaseAdapter {
     public PhotoAdapter(Context c) {
         this.context = c;
         this.items = new ItemSeeker().find();
-        for(int i=0; i<10; i++) {
-            Item item = this.items.get(i);
-            if(item != null) {
-                item.getBitmap();
-            }
-        }
         TypedArray attr = context.obtainStyledAttributes(R.styleable.ProductsGallery);
         attr.recycle();
     }
@@ -46,15 +43,35 @@ public class PhotoAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        ImageView imageView = new ImageView(context);
-        Item item = items.get(i);
-        if(item.getBitmap() == null) {
-            if(item.bitmap == null) {
-                item.bitmap = ((BitmapDrawable)context.getResources().getDrawable(R.drawable.noitem)).getBitmap();
-            }
+        final ImageView imageView = new ImageView(context);
+        final Item item = items.get(i);
+        
+        Bitmap bitmap = item.thumbBitmap;
+        if(bitmap == null) {
+        
+            final Handler handler = new Handler() {
+                public void handleMessage(Message message) {
+                    imageView.setImageBitmap((Bitmap)message.obj);
+                }
+            };
+            
+            Thread thread = new Thread() {
+                public void run() {
+                    item.getThumbBitmap();
+                    if(item.thumbBitmap == null) {
+                        item.thumbBitmap = ((BitmapDrawable)context.getResources().getDrawable(R.drawable.noitem)).getBitmap();
+                    }
+                    
+                    Message message = handler.obtainMessage(1, item.thumbBitmap);
+                    handler.sendMessage(message);
+                }
+            };
+
+            thread.start();
+            bitmap = ((BitmapDrawable)context.getResources().getDrawable(R.drawable.noitem)).getBitmap();
         }
 
-        imageView.setImageBitmap(item.bitmap);
+        imageView.setImageBitmap(bitmap);
         imageView.setLayoutParams(new Gallery.LayoutParams(200, 150));
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         return imageView;
