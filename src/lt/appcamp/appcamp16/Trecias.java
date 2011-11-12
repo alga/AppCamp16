@@ -37,6 +37,9 @@ public class Trecias extends Activity
         coverFlow.setOnItemSelectedListener(new SelectListener(this));
         
         findViewById(R.id.preview).setOnClickListener(new PreviewClickListener(this));
+        
+        TextView categoryTitleView = (TextView) findViewById(R.id.categoryTitle);
+        categoryTitleView.setText("Kategorijos pavadinimas");
     }
     
     @Override
