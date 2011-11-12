@@ -7,6 +7,7 @@ import lt.appcamp.appcamp16.utils.WasteCalculator;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -36,6 +37,18 @@ public class Trecias extends Activity
         coverFlow.setOnItemSelectedListener(new SelectListener(this));
         
         findViewById(R.id.preview).setOnClickListener(new PreviewClickListener(this));
+    }
+    
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && findViewById(R.id.preview).getVisibility() == View.VISIBLE) {
+            
+            findViewById(R.id.preview).setVisibility(View.GONE);
+            
+            return true;
+        }
+        
+        return super.onKeyDown(keyCode, event);
     }
 
     private class SelectListener implements AdapterView.OnItemSelectedListener {
