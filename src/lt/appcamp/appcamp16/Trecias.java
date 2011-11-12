@@ -53,6 +53,9 @@ public class Trecias extends Activity
             TextView wasteInfo = (TextView) findViewById(R.id.wasteInfo);
             //wasteInfo.setText(WasteCalculator.calculate(item).toString());
             wasteInfo.setText("111");
+            
+            TextView titleView = (TextView) findViewById(R.id.title);
+            titleView.setText(item.title);
         }
 
         @Override
