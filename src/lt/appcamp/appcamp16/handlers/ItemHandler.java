@@ -34,7 +34,9 @@ public class ItemHandler extends DefaultHandler {
     
     public void endElement(String uri, String localName, String qName) throws SAXException {
         if(localName.equals("item")) {
-            items.add(item);
+            if(item.photoUrl != null && !item.photoUrl.isEmpty()) {
+                items.add(item);
+            }
         } else if(localName.equals("title")) {
             item.title = buffer.toString();
         } else if(localName.equals("url")) {
