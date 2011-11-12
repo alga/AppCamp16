@@ -1,23 +1,27 @@
 package lt.appcamp.appcamp16.model;
 
-import android.widget.ImageView;
-import lt.appcamp.appcamp16.R;
-
-import java.util.ArrayList;
 
 public class Category {
     String title;
     Integer id;
     Integer view = null;
+    /* average price in LTL */
+    Integer avgPrice = null;
+    
+    /* average weight in grams */
+    Integer avgWeight = null;
+    
 
     public Category(String title, Integer id) {
         this.title = title;
         this.id = id;
     }
     
-    public Category(String title, Integer id, Integer draw) {
+    public Category(String title, Integer id, Integer avgPrice, Integer avgWeight, Integer draw) {
         this.title = title;
         this.id = id;
+        this.avgPrice = avgPrice;
+        this.avgWeight = avgWeight;
         this.view = draw;
     }
     
@@ -37,6 +41,22 @@ public class Category {
         this.id = id;
     }
     
+    public Integer getAvgPrice() {
+        return avgPrice;
+    }
+    
+    public void setAvgPrice(Integer avgPrice) {
+        this.avgPrice = avgPrice;
+    }
+
+    public Integer getAvgWeight() {
+        return avgWeight;
+    }
+    
+    public void setAvgWeight(Integer avgWeight) {
+        this.avgWeight = avgWeight;
+    }
+
     public Integer getView() {
         return this.view;
     }
