@@ -7,9 +7,12 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
@@ -36,6 +39,9 @@ public class Trecias extends Activity
         coverFlow.setAnimationDuration(1000);
         
         coverFlow.setOnItemClickListener(new ClickListener(this));
+        coverFlow.setOnItemSelectedListener(new SelectListener(this));
+        
+        findViewById(R.id.preview).setOnClickListener(new PreviewClickListener(this));
     }
     
     public class ImageAdapter extends BaseAdapter {
@@ -83,27 +89,86 @@ public class Trecias extends Activity
         }
     }
     
+    private class SelectListener implements AdapterView.OnItemSelectedListener {
+
+        public SelectListener(Context c) {
+            
+        }
+        
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View v, int position,
+                long id) {
+            // TODO Auto-generated method stub
+            
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+            // TODO Auto-generated method stub
+            
+        }
+
+        
+    }
+    
     private class ClickListener implements AdapterView.OnItemClickListener {
 
-        private Animation grow     = null;
-        private View      lastView = null; 
-
+        Context c;
+        
         public ClickListener(Context c) {
-             grow = AnimationUtils.loadAnimation(c, R.anim.grow);
+            this.c = c;
         }
 
         public void  onItemClick(AdapterView<?>  parent, View  v, int position, long id)         {
+            
+            View preview = findViewById(R.id.preview);
+            ImageView imageView = (ImageView)findViewById(R.id.previewImage);
+            
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.k1));
+            
+            Animation fadeInAnimation = AnimationUtils.loadAnimation(c, R.anim.fade_in);
+           
+            preview.startAnimation(fadeInAnimation);
+            preview.setVisibility(View.VISIBLE);
+            
+        }
+   }
+    
+   private class PreviewClickListener implements AdapterView.OnClickListener {
 
-            // Shrink the view that was zoomed 
-            try { if (null != lastView) lastView.clearAnimation();
-            } catch (Exception clear) { }
-
-            // Zoom the new selected view
-            try { v.startAnimation(grow); } catch (Exception animate) {}
-
-            // Set the last view so we can clear the animation 
-            lastView = v;
+        Context c;
+        
+        public PreviewClickListener(Context c) {
+            this.c = c;
         }
 
+        @Override
+        public void onClick(View v) {
+            View preview = findViewById(R.id.preview);
+            
+            Animation fadeOutAnimation = AnimationUtils.loadAnimation(c, R.anim.fade_out);
+           
+            fadeOutAnimation.setAnimationListener(new AnimationListener() {
+                @Override
+                public void onAnimationEnd(Animation arg0) {
+                    findViewById(R.id.preview).setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+                    // TODO Auto-generated method stub
+                    
+                }
+
+                @Override
+                public void onAnimationStart(Animation animation) {
+                    // TODO Auto-generated method stub
+                    
+                }
+            });
+            
+            preview.startAnimation(fadeOutAnimation);
+    
+        }
    }
 }
