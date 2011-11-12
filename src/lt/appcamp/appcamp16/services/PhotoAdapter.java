@@ -18,6 +18,7 @@ public class PhotoAdapter extends BaseAdapter {
     protected ArrayList<Item> items;
     public PhotoAdapter(Context c) {
         this.context = c;
+        this.items = new ItemSeeker().find();
         TypedArray attr = context.obtainStyledAttributes(R.styleable.ProductsGallery);
         attr.recycle();
     }
@@ -45,6 +46,6 @@ public class PhotoAdapter extends BaseAdapter {
         imageView.setImageBitmap(bitmap);
         imageView.setLayoutParams(new Gallery.LayoutParams(200, 150));
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-        return view;
+        return imageView;
     }
 }
