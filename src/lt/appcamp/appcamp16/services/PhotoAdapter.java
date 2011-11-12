@@ -83,7 +83,7 @@ public class PhotoAdapter extends BaseAdapter {
         }
         
         imageView.setLayoutParams(new Gallery.LayoutParams(x, y));
-        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         return imageView;
     }
 }
