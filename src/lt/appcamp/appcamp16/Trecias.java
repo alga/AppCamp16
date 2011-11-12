@@ -7,6 +7,7 @@ import lt.appcamp.appcamp16.utils.WasteCalculator;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -41,6 +42,21 @@ public class Trecias extends Activity
         coverFlow.setOnItemSelectedListener(new SelectListener(this));
         
         findViewById(R.id.preview).setOnClickListener(new PreviewClickListener(this));
+        
+        TextView categoryTitleView = (TextView) findViewById(R.id.categoryTitle);
+        categoryTitleView.setText("Kategorijos pavadinimas");
+    }
+    
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && findViewById(R.id.preview).getVisibility() == View.VISIBLE) {
+            
+            findViewById(R.id.preview).setVisibility(View.GONE);
+            
+            return true;
+        }
+        
+        return super.onKeyDown(keyCode, event);
     }
 
     private class SelectListener implements AdapterView.OnItemSelectedListener {
@@ -56,8 +72,7 @@ public class Trecias extends Activity
             Item item = (Item) parent.getSelectedItem();
             
             TextView wasteInfo = (TextView) findViewById(R.id.wasteInfo);
-            //wasteInfo.setText(WasteCalculator.calculate(item).toString());
-            wasteInfo.setText("111");
+            wasteInfo.setText(WasteCalculator.calculate(item).toString());
             
             TextView titleView = (TextView) findViewById(R.id.title);
             titleView.setText(item.title);
@@ -85,16 +100,13 @@ public class Trecias extends Activity
             
             View preview = findViewById(R.id.preview);
             ImageView imageView = (ImageView)findViewById(R.id.previewImage);
-            TextView wasteInfo = (TextView)findViewById(R.id.wasteInfo);
             
             imageView.setScaleType(ImageView.ScaleType.CENTER);
             imageView.setImageBitmap(item.getPhotoBitmap());
             
-            
+        
             Animation fadeInAnimation = AnimationUtils.loadAnimation(c, R.anim.fade_in);
-           
-            wasteInfo.setText(WasteCalculator.calculate(item).toString());
-            
+
             preview.startAnimation(fadeInAnimation);
             preview.setVisibility(View.VISIBLE);
             
