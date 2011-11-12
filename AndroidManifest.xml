@@ -11,5 +11,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="Antras"
+                  android:label="@string/antras_name">
+        </activity>
+        <activity android:name="Trecias"
+                  android:label="@string/trecias_name">
+        </activity>
     </application>
 </manifest> 
