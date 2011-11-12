@@ -2,10 +2,7 @@ package lt.appcamp.appcamp16.handlers;
 
 import java.util.ArrayList;
 
-import android.util.Log;
-import lt.appcamp.appcamp16.model.Category;
 import lt.appcamp.appcamp16.model.Item;
-import lt.appcamp.appcamp16.services.CategoriesSeeker;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;

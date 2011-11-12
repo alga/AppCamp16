@@ -1,15 +1,16 @@
 package lt.appcamp.appcamp16.model;
 
 
+
 public class Category {
     String title;
     Integer id;
     Integer view = null;
     /* average price in LTL */
-    Integer avgPrice = null;
+    Double avgPrice = null;
     
-    /* average weight in grams */
-    Integer avgWeight = null;
+    /* average weight in kg */
+    Double avgWeight = null;
     
 
     public Category(String title, Integer id) {
@@ -17,7 +18,7 @@ public class Category {
         this.id = id;
     }
     
-    public Category(String title, Integer id, Integer avgPrice, Integer avgWeight, Integer draw) {
+    public Category(String title, Integer id, Double avgPrice, Double avgWeight, Integer draw) {
         this.title = title;
         this.id = id;
         this.avgPrice = avgPrice;
@@ -41,19 +42,19 @@ public class Category {
         this.id = id;
     }
     
-    public Integer getAvgPrice() {
+    public Double getAvgPrice() {
         return avgPrice;
     }
     
-    public void setAvgPrice(Integer avgPrice) {
+    public void setAvgPrice(Double avgPrice) {
         this.avgPrice = avgPrice;
     }
 
-    public Integer getAvgWeight() {
+    public Double getAvgWeight() {
         return avgWeight;
     }
     
-    public void setAvgWeight(Integer avgWeight) {
+    public void setAvgWeight(Double avgWeight) {
         this.avgWeight = avgWeight;
     }
 

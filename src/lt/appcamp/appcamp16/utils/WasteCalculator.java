@@ -9,19 +9,16 @@ public class WasteCalculator {
         
         double randomCoeff = (item.id % 10 + 1) / 10.0;
 
-        Integer avgPrice = 30;
-        Integer avgWeight = 300;
+        Double avgPrice = 30.0;
+        Double avgWeight = 0.3;
         
         if (item.category != null) {
             avgPrice = item.category.getAvgPrice();
             avgWeight = item.category.getAvgWeight();
         }
-        Double r = avgPrice.doubleValue() * randomCoeff;
-        result.waterLiters = r.intValue();
+        result.waterLiters = avgPrice.doubleValue() * randomCoeff;
 
-        r = avgWeight / 1000.0 * 20 * randomCoeff;
-
-        result.co2Kg = r.intValue();
+        result.co2Kg = avgWeight * 20 * randomCoeff;
         
         return result;
     }
