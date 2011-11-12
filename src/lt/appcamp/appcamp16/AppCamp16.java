@@ -10,6 +10,6 @@ public class AppCamp16 extends Activity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pirmas);
+        setContentView(R.layout.antras);
     }
 }

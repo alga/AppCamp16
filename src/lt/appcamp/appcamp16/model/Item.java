@@ -10,7 +10,6 @@ public class Item {
     public String size;
     
     /* filled in not from XML */
-    public int categoryId;
     public Category category;
     
 }

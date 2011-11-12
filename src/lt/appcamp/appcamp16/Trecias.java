@@ -1,23 +1,21 @@
 package lt.appcamp.appcamp16;
 
-import lt.appcamp.appcamp16.services.PhotoAdapter;
 import lt.appcamp.appcamp16.ui.CoverFlow;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.LabeledIntent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class Trecias extends Activity
 {
@@ -120,14 +118,15 @@ public class Trecias extends Activity
         }
 
         public void  onItemClick(AdapterView<?>  parent, View  v, int position, long id)         {
-            
             View preview = findViewById(R.id.preview);
             ImageView imageView = (ImageView)findViewById(R.id.previewImage);
+            TextView wasteInfo = (TextView) findViewById(R.id.wasteInfo);
             
             imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.k1));
             
             Animation fadeInAnimation = AnimationUtils.loadAnimation(c, R.anim.fade_in);
            
+            wasteInfo.setText(text)
             preview.startAnimation(fadeInAnimation);
             preview.setVisibility(View.VISIBLE);
             

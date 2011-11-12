@@ -1,12 +1,14 @@
 package lt.appcamp.appcamp16.handlers;
 
+import java.util.ArrayList;
+
+import lt.appcamp.appcamp16.model.Category;
 import lt.appcamp.appcamp16.model.Item;
-import lt.appcamp.appcamp16.model.Photo;
+import lt.appcamp.appcamp16.services.CategoriesSeeker;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-
-import java.util.ArrayList;
 
 public class ItemHandler extends DefaultHandler {
     private StringBuffer buffer = new StringBuffer();
@@ -39,6 +41,18 @@ public class ItemHandler extends DefaultHandler {
             }
         } else if(localName.equals("title")) {
             item.title = buffer.toString();
+        } else if (localName.equals("id")) {
+            item.id = Integer.parseInt(buffer.toString());
+        } else if(localName.equals("catalog_id_1")) {
+            int categoryId = Integer.parseInt(buffer.toString());
+            
+            for (Category c : CategoriesSeeker.categories) {
+                if (c.getId().equals(categoryId)) {
+                    item.category = c;
+                    break;
+                }
+            }
+            
         } else if(localName.equals("url")) {
             if(thumbnail == true) {
                 thumbnailUrl = buffer.toString();
