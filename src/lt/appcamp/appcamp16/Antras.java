@@ -19,8 +19,8 @@ public class Antras extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.antras);
 
-        CoverFlow gal = (CoverFlow) findViewById(
-            R.id.category_gallery);
+        //CoverFlow gal = (CoverFlow) findViewById(R.id.category_gallery);
+        Gallery gal = (Gallery) findViewById(R.id.category_gallery);
         gal.setAdapter(new ImageAdapter(this));
 
     }
