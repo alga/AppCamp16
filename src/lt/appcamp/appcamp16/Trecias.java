@@ -1,5 +1,7 @@
 package lt.appcamp.appcamp16;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import lt.appcamp.appcamp16.model.Item;
 import lt.appcamp.appcamp16.services.PhotoAdapter;
 import lt.appcamp.appcamp16.ui.CoverFlow;
@@ -17,16 +19,14 @@ import android.widget.TextView;
 
 public class Trecias extends Activity
 {
-    /** Called when the activity is first created. */
+    CoverFlow coverFlow;
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trecias);
 
-        CoverFlow coverFlow = (CoverFlow) findViewById(R.id.gallery);
-
-        PhotoAdapter coverImageAdapter =  new PhotoAdapter(this);
-        coverFlow.setAdapter(coverImageAdapter);
+        coverFlow = (CoverFlow) findViewById(R.id.gallery);
         
         coverFlow.setSpacing(-25);
         coverFlow.setSelection(4, true);
@@ -36,6 +36,25 @@ public class Trecias extends Activity
         coverFlow.setOnItemSelectedListener(new SelectListener(this));
         
         findViewById(R.id.preview).setOnClickListener(new PreviewClickListener(this));
+        
+        new LoadPhotoAdapter().execute();
+    }
+
+    class LoadPhotoAdapter extends AsyncTask<Void, Void, PhotoAdapter> {
+        ProgressDialog progress;
+        protected void onPreExecute() {
+            this.progress = ProgressDialog.show(Trecias.this, "", "Loading...", true);
+        }
+
+        @Override
+        protected PhotoAdapter doInBackground(Void... voids) {
+            return new PhotoAdapter(Trecias.this);
+        }
+
+        protected void onPostExecute(PhotoAdapter adapter) {
+            coverFlow.setAdapter(adapter);
+            progress.dismiss();
+        }
     }
 
     private class SelectListener implements AdapterView.OnItemSelectedListener {
