@@ -35,4 +35,8 @@ public class CategoriesSeeker {
     public ArrayList<Category> find() {
         return categories;
     }
+
+    public int idByIndex(int index) {
+        return categories.get(index).getId().intValue();
+    }
 }

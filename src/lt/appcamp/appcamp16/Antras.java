@@ -1,6 +1,7 @@
 package lt.appcamp.appcamp16;
 
 import lt.appcamp.appcamp16.ui.CoverFlow;
+import lt.appcamp.appcamp16.services.CategoriesSeeker;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -34,32 +35,15 @@ public class Antras extends Activity
     public class ImageAdapter extends BaseAdapter {
         int mGalleryItemBackground;
         private Context mContext;
-
-        private Integer[] mImageIds = {
-                R.drawable.c2,
-                R.drawable.c3,
-                R.drawable.c4,
-                R.drawable.c5,
-                R.drawable.c6,
-                R.drawable.c7,
-                R.drawable.c8,
-                R.drawable.c9,
-                R.drawable.c10,
-                R.drawable.c11,
-                R.drawable.c12,
-                R.drawable.c13
-        };
+        private CategoriesSeeker categories;
 
         public ImageAdapter(Context c) {
             mContext = c;
-//            TypedArray attr = mContext.obtainStyledAttributes(R.styleable.Trecias);
-//            mGalleryItemBackground = attr.getResourceId(
-//                    R.styleable.HelloGallery_android_galleryItemBackground, 0);
-//            attr.recycle();
+            categories = new CategoriesSeeker();
         }
 
         public int getCount() {
-            return mImageIds.length;
+            return categories.find().size();
         }
 
         public Object getItem(int position) {
@@ -73,7 +57,7 @@ public class Antras extends Activity
         public View getView(int position, View convertView, ViewGroup parent) {
             ImageView imageView = new ImageView(mContext);
 
-            imageView.setImageResource(mImageIds[position]);
+            imageView.setImageResource(categories.find().get(position).getView());
             imageView.setLayoutParams(new Gallery.LayoutParams(120, 120));
             imageView.setScaleType(ImageView.ScaleType.CENTER);
             imageView.setBackgroundResource(mGalleryItemBackground);
@@ -93,8 +77,9 @@ public class Antras extends Activity
         public void  onItemClick(AdapterView<?>  parent, View  v,
                                  int position, long id) {
 
+            CategoriesSeeker cats = new CategoriesSeeker();
             Intent intent = new Intent(c, Trecias.class);
-            intent.putExtra("category_index", position);
+            intent.putExtra("category_index", cats.idByIndex(position));
             startActivity(intent);
 
         }
