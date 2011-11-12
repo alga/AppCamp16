@@ -1,16 +1,15 @@
 package lt.appcamp.appcamp16;
 
-import lt.appcamp.appcamp16.ui.CoverFlow;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
-import android.content.Intent;
-import android.widget.AdapterView;
 
 
 public class Antras extends Activity
