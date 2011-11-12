@@ -51,8 +51,7 @@ public class Trecias extends Activity
             Item item = (Item) parent.getSelectedItem();
             
             TextView wasteInfo = (TextView) findViewById(R.id.wasteInfo);
-            //wasteInfo.setText(WasteCalculator.calculate(item).toString());
-            wasteInfo.setText("111");
+            wasteInfo.setText(WasteCalculator.calculate(item).toString());
             
             TextView titleView = (TextView) findViewById(R.id.title);
             titleView.setText(item.title);
@@ -80,16 +79,13 @@ public class Trecias extends Activity
             
             View preview = findViewById(R.id.preview);
             ImageView imageView = (ImageView)findViewById(R.id.previewImage);
-            TextView wasteInfo = (TextView)findViewById(R.id.wasteInfo);
             
             imageView.setScaleType(ImageView.ScaleType.CENTER);
             imageView.setImageBitmap(item.getPhotoBitmap());
             
-            
+        
             Animation fadeInAnimation = AnimationUtils.loadAnimation(c, R.anim.fade_in);
-           
-            wasteInfo.setText(WasteCalculator.calculate(item).toString());
-            
+
             preview.startAnimation(fadeInAnimation);
             preview.setVisibility(View.VISIBLE);
             
