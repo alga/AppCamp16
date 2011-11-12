@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -72,8 +73,17 @@ public class PhotoAdapter extends BaseAdapter {
         }
 
         imageView.setImageBitmap(bitmap);
-        imageView.setLayoutParams(new Gallery.LayoutParams(200, 150));
-        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        
+        Integer x = 200;
+        Integer y = x * (bitmap.getHeight() / bitmap.getWidth());
+        
+        if(y > 150) {
+            y = 150;
+            x = 150 * (bitmap.getWidth() / bitmap.getHeight());
+        }
+        
+        imageView.setLayoutParams(new Gallery.LayoutParams(x, y));
+        imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         return imageView;
     }
 }
