@@ -6,16 +6,12 @@ import lt.appcamp.appcamp16.ui.CoverFlow;
 import lt.appcamp.appcamp16.utils.WasteCalculator;
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -81,6 +77,7 @@ public class Trecias extends Activity
             
             View preview = findViewById(R.id.preview);
             ImageView imageView = (ImageView)findViewById(R.id.previewImage);
+            TextView wasteInfo = (TextView)findViewById(R.id.wasteInfo);
             
             imageView.setScaleType(ImageView.ScaleType.CENTER);
             imageView.setImageBitmap(item.getPhotoBitmap());
@@ -88,6 +85,8 @@ public class Trecias extends Activity
             
             Animation fadeInAnimation = AnimationUtils.loadAnimation(c, R.anim.fade_in);
            
+            wasteInfo.setText(WasteCalculator.calculate(item).toString());
+            
             preview.startAnimation(fadeInAnimation);
             preview.setVisibility(View.VISIBLE);
             

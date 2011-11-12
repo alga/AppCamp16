@@ -44,16 +44,8 @@ public class ItemHandler extends DefaultHandler {
             item.title = buffer.toString();
         } else if (localName.equals("id")) {
             item.id = Integer.parseInt(buffer.toString());
-        } else if(localName.equals("catalog_id_1")) {
-            int categoryId = Integer.parseInt(buffer.toString());
-            
-            for (Category c : CategoriesSeeker.categories) {
-                if (c.getId().equals(categoryId)) {
-                    item.category = c;
-                    break;
-                }
-            }
-            
+        } else if (localName.equals("size")) {
+            item.size = buffer.toString();
         } else if(localName.equals("url")) {
             if(thumbnail == true) {
                 thumbnailUrl = buffer.toString();
