@@ -22,6 +22,8 @@ public class Antras extends Activity
         //CoverFlow gal = (CoverFlow) findViewById(R.id.category_gallery);
         Gallery gal = (Gallery) findViewById(R.id.category_gallery);
         gal.setAdapter(new ImageAdapter(this));
+        //gal.setMaxRotationAngle(0);
+        //gal.setMaxZoom(-100);
 
     }
 
@@ -30,12 +32,18 @@ public class Antras extends Activity
         private Context mContext;
 
         private Integer[] mImageIds = {
-                R.drawable.k1,
-                R.drawable.k2,
-                R.drawable.k3,
-                R.drawable.k4,
-                R.drawable.k5,
-                R.drawable.k6
+                R.drawable.c2,
+                R.drawable.c3,
+                R.drawable.c4,
+                R.drawable.c5,
+                R.drawable.c6,
+                R.drawable.c7,
+                R.drawable.c8,
+                R.drawable.c9,
+                R.drawable.c10,
+                R.drawable.c11,
+                R.drawable.c12,
+                R.drawable.c13
         };
 
         public ImageAdapter(Context c) {
@@ -62,11 +70,12 @@ public class Antras extends Activity
             ImageView imageView = new ImageView(mContext);
 
             imageView.setImageResource(mImageIds[position]);
-            imageView.setLayoutParams(new Gallery.LayoutParams(150, 100));
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            imageView.setLayoutParams(new Gallery.LayoutParams(120, 120));
+            imageView.setScaleType(ImageView.ScaleType.CENTER);
             imageView.setBackgroundResource(mGalleryItemBackground);
 
             return imageView;
         }
     }
 }
+

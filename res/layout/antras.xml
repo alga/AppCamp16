@@ -3,31 +3,19 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@drawable/greeting"
     >
-  <TextView
-      android:layout_width="fill_parent"
-      android:layout_height="100dp"
-      android:text="Pick category"
-      android:textSize="20dp"
-      />
-  <LinearLayout
-      android:layout_width="fill_parent"
-      android:layout_height="fill_parent"
-      android:background="@drawable/greeting"
-      android:orientation="vertical"
-      >
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1"
         ></LinearLayout>
-    <!--<lt.appcamp.appcamp16.ui.CoverFlow -->
-    <Gallery
+  <!-- <lt.appcamp.appcamp16.ui.CoverFlow -->
+  <Gallery
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/category_gallery"
         android:layout_weight="3"
         />
-  </LinearLayout>
 </LinearLayout>
 
