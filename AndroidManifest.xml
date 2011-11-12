@@ -12,7 +12,8 @@
                   android:label="@string/antras_name">
         </activity>
         <activity android:name="Trecias"
-                  android:label="@string/trecias_name">
+                  android:label="@string/trecias_name"
+                  android:screenOrientation="portrait">
                   
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
