@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -20,12 +19,16 @@ import java.util.ArrayList;
 public class PhotoAdapter extends BaseAdapter {
     protected Context context;
     protected ArrayList<Item> items;
-    public PhotoAdapter(Context c) {
+    public PhotoAdapter(Context c, int category_id) {
         this.context = c;
-        this.items = new ItemSeeker().find();
+
         TypedArray attr = context.obtainStyledAttributes(R.styleable.ProductsGallery);
         attr.recycle();
+
+        items = new ItemSeeker(category_id).find();
     }
+
+
     
     @Override
     public int getCount() {
