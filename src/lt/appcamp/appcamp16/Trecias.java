@@ -5,8 +5,10 @@ import lt.appcamp.appcamp16.services.PhotoAdapter;
 import lt.appcamp.appcamp16.ui.CoverFlow;
 import lt.appcamp.appcamp16.utils.WasteCalculator;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 
 public class Trecias extends Activity
 {
+    
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,9 +38,14 @@ public class Trecias extends Activity
         coverFlow.setOnItemClickListener(new ClickListener(this));
         coverFlow.setOnItemSelectedListener(new SelectListener(this));
         
+        //ProgressDialog dialog = new ProgressDialog(getApplicationContext());
+        //dialog.show();
+        //ProgressDialog.show(this, null, "Loading...", true);
+        
         findViewById(R.id.preview).setOnClickListener(new PreviewClickListener(this));
     }
 
+    
     private class SelectListener implements AdapterView.OnItemSelectedListener {
 
         public SelectListener(Context c) {
@@ -74,22 +82,58 @@ public class Trecias extends Activity
             this.c = c;
         }
 
+        
         public void  onItemClick(AdapterView<?>  parent, View  v, int position, long id)         {
             Item item = (Item)parent.getSelectedItem();
+            ProgressDialog progressDialog = null;
+            if (item.photoBitmap == null) {
+                progressDialog = ProgressDialog.show(Trecias.this, null, "Loading...", true);                
+            }
             
-            View preview = findViewById(R.id.preview);
-            ImageView imageView = (ImageView)findViewById(R.id.previewImage);
+            ProgressDialog progressDialog = ProgressDialog.show(Trecias.this, null, "Loading...", true);
             
-            imageView.setScaleType(ImageView.ScaleType.CENTER);
-            imageView.setImageBitmap(item.getPhotoBitmap());
-            
-        
-            Animation fadeInAnimation = AnimationUtils.loadAnimation(c, R.anim.fade_in);
 
-            preview.startAnimation(fadeInAnimation);
-            preview.setVisibility(View.VISIBLE);
+            ImageView imageView = (ImageView)findViewById(R.id.previewImage);
+            View preview = findViewById(R.id.preview);
+
+            imageView.setScaleType(ImageView.ScaleType.CENTER);
+            
+            
+            new Thread() {
+                public void run() {
+                    ImageView imageView = (ImageView)findViewById(R.id.previewImage);
+
+                    imageView.setImageBitmap(item.getPhotoBitmap());
+                    
+                    
+                    Animation fadeInAnimation = AnimationUtils.loadAnimation(c, R.anim.fade_in);
+
+                    if (showLoader) {
+                        Trecias.this.stopLoading();
+                    }
+                    preview.startAnimation(fadeInAnimation);
+                    preview.setVisibility(View.VISIBLE);
+
+                }
+                
+            }.start();
+            
             
         }
+        
+        private class ItemClickThread implements Runnable {
+
+            public void Create() {
+                
+            }
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                
+            }
+        
+        }
+
    }
     
    private class PreviewClickListener implements AdapterView.OnClickListener {
