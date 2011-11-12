@@ -19,13 +19,13 @@ import java.util.ArrayList;
 public class PhotoAdapter extends BaseAdapter {
     protected Context context;
     protected ArrayList<Item> items;
-    public PhotoAdapter(Context c) {
+    public PhotoAdapter(Context c, int category_id) {
         this.context = c;
 
         TypedArray attr = context.obtainStyledAttributes(R.styleable.ProductsGallery);
         attr.recycle();
 
-        items = new ItemSeeker().find();
+        items = new ItemSeeker(category_id).find();
     }
 
 

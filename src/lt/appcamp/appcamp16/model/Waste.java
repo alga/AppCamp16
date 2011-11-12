@@ -6,7 +6,7 @@ public class Waste {
     
     @Override
     public String toString() {
-        return "water: " + Math.round(waterLiters) + " ltr, CO2: " + Math.round(co2Kg * 10) / 10.0 + " kg";
+        return "Water: " + Math.round(waterLiters) + " ltr, CO2: " + Math.round(co2Kg * 10) / 10.0 + " kg";
         
     }
 }

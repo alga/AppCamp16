@@ -9,6 +9,7 @@ import lt.appcamp.appcamp16.utils.WasteCalculator;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -16,17 +17,26 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.util.Log;
 
 public class Trecias extends Activity
 {
     CoverFlow coverFlow;
-    
+    public static final String CATEGORY_PARAM = "category_id";
+    Integer category_id;
+
+    /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trecias);
 
         coverFlow = (CoverFlow) findViewById(R.id.gallery);
+
+        category_id = getIntent().getExtras().getInt(CATEGORY_PARAM);
+        Log.i("Trecias","got category " + new Integer(category_id).toString());
+        PhotoAdapter coverImageAdapter =  new PhotoAdapter(this, category_id);
+        coverFlow.setAdapter(coverImageAdapter);
         
         coverFlow.setSpacing(-25);
         coverFlow.setSelection(4, true);
@@ -36,6 +46,8 @@ public class Trecias extends Activity
         coverFlow.setOnItemSelectedListener(new SelectListener(this));
         
         findViewById(R.id.preview).setOnClickListener(new PreviewClickListener(this));
+        TextView categoryTitleView = (TextView) findViewById(R.id.categoryTitle);
+        categoryTitleView.setText("Kategorijos pavadinimas");
         
         new LoadPhotoAdapter().execute();
     }
@@ -48,13 +60,25 @@ public class Trecias extends Activity
 
         @Override
         protected PhotoAdapter doInBackground(Void... voids) {
-            return new PhotoAdapter(Trecias.this);
+            return new PhotoAdapter(Trecias.this, category_id);
         }
 
         protected void onPostExecute(PhotoAdapter adapter) {
             coverFlow.setAdapter(adapter);
             progress.dismiss();
         }
+   }
+    
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && findViewById(R.id.preview).getVisibility() == View.VISIBLE) {
+            
+            findViewById(R.id.preview).setVisibility(View.GONE);
+            
+            return true;
+        }
+        
+        return super.onKeyDown(keyCode, event);
     }
 
     private class SelectListener implements AdapterView.OnItemSelectedListener {
