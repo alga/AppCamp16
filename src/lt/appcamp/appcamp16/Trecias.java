@@ -1,9 +1,10 @@
 package lt.appcamp.appcamp16;
 
+import lt.appcamp.appcamp16.model.Item;
 import lt.appcamp.appcamp16.ui.CoverFlow;
+import lt.appcamp.appcamp16.utils.WasteCalculator;
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.LabeledIntent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.View;
@@ -126,7 +127,8 @@ public class Trecias extends Activity
             
             Animation fadeInAnimation = AnimationUtils.loadAnimation(c, R.anim.fade_in);
            
-            wasteInfo.setText(text)
+           // Item item = (Item) parent.getSelectedItem();
+           // wasteInfo.setText(WasteCalculator.calculate(item).toString());
             preview.startAnimation(fadeInAnimation);
             preview.setVisibility(View.VISIBLE);
             
