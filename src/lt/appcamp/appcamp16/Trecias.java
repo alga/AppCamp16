@@ -40,6 +40,8 @@ public class Trecias extends Activity
         
         TextView categoryTitleView = (TextView) findViewById(R.id.categoryTitle);
         categoryTitleView.setText("Kategorijos pavadinimas");
+        
+        coverFlow.setSelection(1);
     }
     
     @Override
