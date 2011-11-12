@@ -8,7 +8,8 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -19,7 +20,8 @@ import android.widget.TextView;
 
 public class Trecias extends Activity
 {
-    
+    public static final String CATEGORY_PARAM = "category_id";
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,7 +30,9 @@ public class Trecias extends Activity
 
         CoverFlow coverFlow = (CoverFlow) findViewById(R.id.gallery);
 
-        PhotoAdapter coverImageAdapter =  new PhotoAdapter(this);
+        int category_id = getIntent().getExtras().getInt(CATEGORY_PARAM);
+        Log.i("Trecias","got category " + new Integer(category_id).toString());
+        PhotoAdapter coverImageAdapter =  new PhotoAdapter(this, category_id);
         coverFlow.setAdapter(coverImageAdapter);
         
         coverFlow.setSpacing(-25);
@@ -43,6 +47,21 @@ public class Trecias extends Activity
         //ProgressDialog.show(this, null, "Loading...", true);
         
         findViewById(R.id.preview).setOnClickListener(new PreviewClickListener(this));
+        
+        TextView categoryTitleView = (TextView) findViewById(R.id.categoryTitle);
+        categoryTitleView.setText("Kategorijos pavadinimas");
+    }
+    
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && findViewById(R.id.preview).getVisibility() == View.VISIBLE) {
+            
+            findViewById(R.id.preview).setVisibility(View.GONE);
+            
+            return true;
+        }
+        
+        return super.onKeyDown(keyCode, event);
     }
 
     

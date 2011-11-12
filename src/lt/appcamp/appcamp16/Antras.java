@@ -78,7 +78,7 @@ public class Antras extends Activity
 
             CategoriesSeeker cats = new CategoriesSeeker();
             Intent intent = new Intent(c, Trecias.class);
-            intent.putExtra("category_index", cats.idByIndex(position));
+            intent.putExtra(Trecias.CATEGORY_PARAM, cats.idByIndex(position));
             startActivity(intent);
 
         }
