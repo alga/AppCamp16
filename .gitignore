@@ -16,5 +16,8 @@ bin/**/*
 # generated GUI files
 *R.java
 
+# Local settings
+local.properties
+
 *.iml
 .idea/
