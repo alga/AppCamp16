@@ -35,9 +35,7 @@ public class Trecias extends Activity
 
         category_id = getIntent().getExtras().getInt(CATEGORY_PARAM);
         Log.i("Trecias","got category " + new Integer(category_id).toString());
-        PhotoAdapter coverImageAdapter =  new PhotoAdapter(this, category_id);
-        coverFlow.setAdapter(coverImageAdapter);
-        
+
         coverFlow.setSpacing(-25);
         coverFlow.setSelection(4, true);
         coverFlow.setAnimationDuration(1000);
