@@ -1,6 +1,7 @@
 package lt.appcamp.appcamp16;
 
 import lt.appcamp.appcamp16.model.Item;
+import lt.appcamp.appcamp16.services.PhotoAdapter;
 import lt.appcamp.appcamp16.ui.CoverFlow;
 import lt.appcamp.appcamp16.utils.WasteCalculator;
 import android.app.Activity;
