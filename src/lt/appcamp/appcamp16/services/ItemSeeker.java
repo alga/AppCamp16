@@ -14,6 +14,7 @@ public class ItemSeeker {
         
         String xml = new HttpRetriever().retrieve(url);
         ArrayList<Item> items = new XmlParser().parseItemResponse(xml);
+        
         return items;
     }
 }
