@@ -12,10 +12,6 @@
                   android:screenOrientation="portrait"
                   android:label="@string/antras_name"
                   android:theme="@android:style/Theme.NoTitleBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="Trecias"
                   android:label="@string/trecias_name"
