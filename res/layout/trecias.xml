@@ -10,26 +10,19 @@
 		    android:layout_width="fill_parent"
 		    android:layout_height="fill_parent">
     
-	    <LinearLayout
-		    android:orientation="vertical"
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:layout_weight="1"
-		    />
-	    
-	    
 		<lt.appcamp.appcamp16.ui.CoverFlow 
 		   	android:id="@+id/gallery"
 		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
+		    android:layout_height="fill_parent"
 		    android:layout_weight="1"
 			/>
 		
     	<LinearLayout
 		    android:orientation="vertical"
 		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:layout_weight="1">
+		    android:layout_height="fill_parent"
+		    android:layout_weight="1"
+		    android:background="#5cad33">
 		    
 	    	    
 		    <TextView
