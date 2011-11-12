@@ -1,5 +1,7 @@
 package lt.appcamp.appcamp16;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import lt.appcamp.appcamp16.model.Item;
 import lt.appcamp.appcamp16.services.PhotoAdapter;
 import lt.appcamp.appcamp16.ui.CoverFlow;
@@ -19,7 +21,9 @@ import android.util.Log;
 
 public class Trecias extends Activity
 {
+    CoverFlow coverFlow;
     public static final String CATEGORY_PARAM = "category_id";
+    Integer category_id;
 
     /** Called when the activity is first created. */
     @Override
@@ -27,9 +31,9 @@ public class Trecias extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trecias);
 
-        CoverFlow coverFlow = (CoverFlow) findViewById(R.id.gallery);
+        coverFlow = (CoverFlow) findViewById(R.id.gallery);
 
-        int category_id = getIntent().getExtras().getInt(CATEGORY_PARAM);
+        category_id = getIntent().getExtras().getInt(CATEGORY_PARAM);
         Log.i("Trecias","got category " + new Integer(category_id).toString());
         PhotoAdapter coverImageAdapter =  new PhotoAdapter(this, category_id);
         coverFlow.setAdapter(coverImageAdapter);
@@ -42,10 +46,28 @@ public class Trecias extends Activity
         coverFlow.setOnItemSelectedListener(new SelectListener(this));
         
         findViewById(R.id.preview).setOnClickListener(new PreviewClickListener(this));
-        
         TextView categoryTitleView = (TextView) findViewById(R.id.categoryTitle);
         categoryTitleView.setText("Kategorijos pavadinimas");
+        
+        new LoadPhotoAdapter().execute();
     }
+
+    class LoadPhotoAdapter extends AsyncTask<Void, Void, PhotoAdapter> {
+        ProgressDialog progress;
+        protected void onPreExecute() {
+            this.progress = ProgressDialog.show(Trecias.this, "", "Loading...", true);
+        }
+
+        @Override
+        protected PhotoAdapter doInBackground(Void... voids) {
+            return new PhotoAdapter(Trecias.this, category_id);
+        }
+
+        protected void onPostExecute(PhotoAdapter adapter) {
+            coverFlow.setAdapter(adapter);
+            progress.dismiss();
+        }
+   }
     
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

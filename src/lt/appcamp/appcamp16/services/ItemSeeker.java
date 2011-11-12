@@ -27,7 +27,6 @@ public class ItemSeeker {
                 break;
             }
         }
-
     }
 
     public ArrayList<Item> find() {
