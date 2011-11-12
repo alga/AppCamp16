@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
+import android.content.Intent;
+import android.widget.AdapterView;
 
 
 public class Antras extends Activity
@@ -22,6 +24,8 @@ public class Antras extends Activity
         //CoverFlow gal = (CoverFlow) findViewById(R.id.category_gallery);
         Gallery gal = (Gallery) findViewById(R.id.category_gallery);
         gal.setAdapter(new ImageAdapter(this));
+        gal.setOnItemClickListener(new ClickListener(this));
+
         //gal.setMaxRotationAngle(0);
         //gal.setMaxZoom(-100);
 
@@ -77,5 +81,23 @@ public class Antras extends Activity
             return imageView;
         }
     }
-}
 
+    private class ClickListener implements AdapterView.OnItemClickListener {
+
+        Context c;
+
+        public ClickListener(Context c) {
+            this.c = c;
+        }
+
+        public void  onItemClick(AdapterView<?>  parent, View  v,
+                                 int position, long id) {
+
+            Intent intent = new Intent(c, Trecias.class);
+            intent.putExtra("category_index", position);
+            startActivity(intent);
+
+        }
+   }
+
+}
