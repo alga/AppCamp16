@@ -1,5 +1,6 @@
 package lt.appcamp.appcamp16;
 
+import lt.appcamp.appcamp16.services.PhotoAdapter;
 import lt.appcamp.appcamp16.ui.CoverFlow;
 import android.app.Activity;
 import android.content.Context;
@@ -24,10 +25,7 @@ public class Trecias extends Activity
 
         CoverFlow coverFlow = (CoverFlow) findViewById(R.id.gallery);
         
-        coverFlow.setAdapter(new ImageAdapter(this));
-
-        ImageAdapter coverImageAdapter =  new ImageAdapter(this);
-        
+        PhotoAdapter coverImageAdapter =  new PhotoAdapter(this);
         coverFlow.setAdapter(coverImageAdapter);
         
         coverFlow.setSpacing(-25);
@@ -44,50 +42,5 @@ public class Trecias extends Activity
                 
             }
         });
-    }
-    
-    public class ImageAdapter extends BaseAdapter {
-        int mGalleryItemBackground;
-        private Context mContext;
-
-        private Integer[] mImageIds = {
-                R.drawable.k1,
-                R.drawable.k2,
-                R.drawable.k3,
-                R.drawable.k4,
-                R.drawable.k5,
-                R.drawable.k6
-        };
-
-        public ImageAdapter(Context c) {
-            mContext = c;
-            TypedArray attr = mContext.obtainStyledAttributes(R.styleable.ProductsGallery);
-            mGalleryItemBackground = attr.getResourceId(
-                    R.styleable.ProductsGallery_android_galleryItemBackground, 0);
-            attr.recycle();
-        }
-
-        public int getCount() {
-            return mImageIds.length;
-        }
-
-        public Object getItem(int position) {
-            return position;
-        }
-
-        public long getItemId(int position) {
-            return position;
-        }
-
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ImageView imageView = new ImageView(mContext);
-
-            imageView.setImageResource(mImageIds[position]);
-            imageView.setLayoutParams(new Gallery.LayoutParams(200, 150));
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-//            imageView.setBackgroundResource(mGalleryItemBackground);
-
-            return imageView;
-        }
     }
 }
