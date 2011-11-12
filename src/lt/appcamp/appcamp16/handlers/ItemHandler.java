@@ -2,6 +2,7 @@ package lt.appcamp.appcamp16.handlers;
 
 import java.util.ArrayList;
 
+import android.util.Log;
 import lt.appcamp.appcamp16.model.Category;
 import lt.appcamp.appcamp16.model.Item;
 import lt.appcamp.appcamp16.services.CategoriesSeeker;
@@ -43,26 +44,18 @@ public class ItemHandler extends DefaultHandler {
             item.title = buffer.toString();
         } else if (localName.equals("id")) {
             item.id = Integer.parseInt(buffer.toString());
-        } else if(localName.equals("catalog_id_1")) {
-            int categoryId = Integer.parseInt(buffer.toString());
-            
-            for (Category c : CategoriesSeeker.categories) {
-                if (c.getId().equals(categoryId)) {
-                    item.category = c;
-                    break;
-                }
-            }
-            
+        } else if (localName.equals("size")) {
+            item.size = buffer.toString();
         } else if(localName.equals("url")) {
             if(thumbnail == true) {
                 thumbnailUrl = buffer.toString();
-                setThumb();
             } else {
                 item.photoUrl = buffer.toString();
             }
         } else if(localName.equals("type")) {
-            thumbnailType = buffer.toString();
-            setThumb();
+            if(thumbnail == true) {
+                thumbnailType = buffer.toString();
+            }
         } else if(localName.equals("photo")) {
             if(isMain == true) {
                 item.photoUrl = this.photoUrl;
@@ -70,6 +63,8 @@ public class ItemHandler extends DefaultHandler {
             }
         } else if(localName.equals("is_main")) {
             isMain = buffer.toString().equals("true");
+        } else if(localName.equals("thumbnail")) {
+            setThumb();
         }
     }
     
@@ -84,7 +79,8 @@ public class ItemHandler extends DefaultHandler {
     protected void setThumb() {
         if(thumbnail == true && thumbnailType != null && thumbnailType.equals("thumb130")) {
             item.thumbUrl = thumbnailUrl;
-            thumbnail = false;
         }
+        thumbnail = false;
+        thumbnailUrl = null;
     }
 }
