@@ -1,11 +1,13 @@
 package lt.appcamp.appcamp16;
 
 import lt.appcamp.appcamp16.model.Item;
+import lt.appcamp.appcamp16.services.CategoriesSeeker;
 import lt.appcamp.appcamp16.services.PhotoAdapter;
 import lt.appcamp.appcamp16.ui.CoverFlow;
 import lt.appcamp.appcamp16.utils.WasteCalculator;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -23,7 +25,7 @@ public class Trecias extends Activity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trecias);
-
+        
         CoverFlow coverFlow = (CoverFlow) findViewById(R.id.gallery);
 
         PhotoAdapter coverImageAdapter =  new PhotoAdapter(this);
@@ -39,8 +41,8 @@ public class Trecias extends Activity
         findViewById(R.id.preview).setOnClickListener(new PreviewClickListener(this));
         
         TextView categoryTitleView = (TextView) findViewById(R.id.categoryTitle);
-        categoryTitleView.setText("Kategorijos pavadinimas");
-        
+        categoryTitleView.setText((new CategoriesSeeker()).titleByIndex(1));
+     
         coverFlow.setSelection(1);
     }
     

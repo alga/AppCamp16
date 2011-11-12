@@ -21,8 +21,10 @@
 	    	android:layout_marginRight="20dp"
 	    	android:textColor="#000000"
 	    	android:text=""
-	    	android:textAppearance="?android:attr/textAppearanceLarge"
-	    	android:textStyle="bold" />
+	    	android:textStyle="bold" 
+	    	android:typeface="sans"  
+	    	android:textSize="24sp"  
+	    	/>
            		    
 		<lt.appcamp.appcamp16.ui.CoverFlow 
 		   	android:id="@+id/gallery"
@@ -54,7 +56,8 @@
 		    	android:layout_marginRight="20dp"
 		    	android:textColor="#ffffff"
 		    	android:text=""
-		    	android:textStyle="bold" />
+		    	android:textStyle="bold" 
+		    	android:typeface="sans" />
 		    
    		    <TextView
 		    	android:id="@+id/title"
@@ -65,7 +68,8 @@
 		    	android:layout_marginRight="20dp"
 		    	android:textColor="#ffffff"
 		    	android:text=""
-		    	android:textStyle="bold" />
+		    	android:textStyle="bold" 
+		    	android:typeface="sans" />
    		    
    		    <LinearLayout
 			    android:orientation="vertical"
