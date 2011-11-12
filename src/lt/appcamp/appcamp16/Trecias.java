@@ -1,7 +1,5 @@
 package lt.appcamp.appcamp16;
 
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import lt.appcamp.appcamp16.model.Item;
 import lt.appcamp.appcamp16.services.PhotoAdapter;
 import lt.appcamp.appcamp16.ui.CoverFlow;
@@ -9,6 +7,7 @@ import lt.appcamp.appcamp16.utils.WasteCalculator;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -124,56 +123,49 @@ public class Trecias extends Activity
         }
 
         
-        public void  onItemClick(AdapterView<?>  parent, View  v, int position, long id)         {
+        public void onItemClick(AdapterView<?>  parent, View  v, int position, long id)         {
             Item item = (Item)parent.getSelectedItem();
-            ProgressDialog progressDialog = null;
+            
+            LoadSinglePhotoTask task = new LoadSinglePhotoTask();
+            
             if (item.photoBitmap == null) {
-                progressDialog = ProgressDialog.show(Trecias.this, null, "Loading...", true);                
+                new LoadSinglePhotoTask().execute(item);
+            } else {
+                task.doInBackground(item);
             }
-            
-            ProgressDialog progressDialog = ProgressDialog.show(Trecias.this, null, "Loading...", true);
-            
-
-            ImageView imageView = (ImageView)findViewById(R.id.previewImage);
-            View preview = findViewById(R.id.preview);
-
-            imageView.setScaleType(ImageView.ScaleType.CENTER);
-            
-            
-            new Thread() {
-                public void run() {
-                    ImageView imageView = (ImageView)findViewById(R.id.previewImage);
-
-                    imageView.setImageBitmap(item.getPhotoBitmap());
-                    
-                    
-                    Animation fadeInAnimation = AnimationUtils.loadAnimation(c, R.anim.fade_in);
-
-                    if (showLoader) {
-                        Trecias.this.stopLoading();
-                    }
-                    preview.startAnimation(fadeInAnimation);
-                    preview.setVisibility(View.VISIBLE);
-
-                }
-                
-            }.start();
-            
-            
         }
         
-        private class ItemClickThread implements Runnable {
-
-            public void Create() {
-                
-            }
+        class LoadSinglePhotoTask extends AsyncTask<Object, Void, Void> {
+            ProgressDialog progress;
+            
             @Override
-            public void run() {
-                // TODO Auto-generated method stub
-                
+            protected void onPreExecute() {
+                this.progress = ProgressDialog.show(Trecias.this, "", "Loading...", true);
             }
-        
-        }
+
+            @Override
+            protected Void doInBackground(Object... objs) {
+                Item item = (Item) objs[0];
+                
+                ImageView imageView = (ImageView)findViewById(R.id.previewImage);
+                View preview = findViewById(R.id.preview);
+
+                imageView.setScaleType(ImageView.ScaleType.CENTER);
+                
+                
+                imageView.setImageBitmap(item.getPhotoBitmap());
+                Animation fadeInAnimation = AnimationUtils.loadAnimation(c, R.anim.fade_in);
+
+                preview.startAnimation(fadeInAnimation);
+                preview.setVisibility(View.VISIBLE);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void adapter) {
+                progress.dismiss();
+            }
+       }
 
    }
     
