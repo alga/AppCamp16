@@ -61,12 +61,15 @@ public class HttpRetriever {
         return null;
     }
 
-    public Bitmap retrieveBitmap(String url) throws Exception {
+    public Bitmap retrieveBitmap(String url) {
         InputStream inputStream = null;
         try {
             inputStream = this.retrieveStream(url);
             final Bitmap bitmap = BitmapFactory.decodeStream(new FlushedInputStream(inputStream));
             return bitmap;
+        } catch(Exception e) {
+            e.printStackTrace();
+            return null;
         } finally {
             Utils.closeStreamQuietly(inputStream);
         }

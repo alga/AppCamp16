@@ -1,23 +1,24 @@
 package lt.appcamp.appcamp16.model;
 
 import android.widget.ImageView;
+import lt.appcamp.appcamp16.R;
 
 import java.util.ArrayList;
 
 public class Category {
     String title;
     Integer id;
-    ImageView view = null;
+    Integer view = null;
 
     public Category(String title, Integer id) {
         this.title = title;
         this.id = id;
     }
     
-    public Category(String title, Integer id, ImageView view) {
+    public Category(String title, Integer id, Integer draw) {
         this.title = title;
         this.id = id;
-        this.view = view;
+        this.view = draw;
     }
     
     public String getTitle() {
@@ -36,11 +37,11 @@ public class Category {
         this.id = id;
     }
     
-    public ImageView getView() {
+    public Integer getView() {
         return this.view;
     }
     
-    public void setView(ImageView view) {
+    public void setView(Integer view) {
         this.view = view;
     }
 }

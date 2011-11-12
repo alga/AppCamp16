@@ -12,10 +12,12 @@ public class ItemHandler extends DefaultHandler {
     private StringBuffer buffer = new StringBuffer();
     private ArrayList<Item> items;
     private Item item;
-    private Photo photo = null;
+
     private boolean thumbnail = false;
     private String thumbnailUrl;
     private String thumbnailType;
+    private boolean isMain = false;
+    private String photoUrl;
 
     public void startElement(String namespaceURI, String localName,
                              String qName, Attributes atts) throws SAXException {
@@ -25,8 +27,6 @@ public class ItemHandler extends DefaultHandler {
             items = new ArrayList<Item>();
         } else if(localName.equals("item")) {
             item = new Item();
-        } else if(localName.equals("photo")) {
-            photo = new Photo();
         } else if(localName.equals("thumbnail")) {
             thumbnail = true;
         }
@@ -41,14 +41,19 @@ public class ItemHandler extends DefaultHandler {
             if(thumbnail == true) {
                 thumbnailUrl = buffer.toString();
                 setThumb();
-            } else if(photo != null) {
-                photo.setOriginalUrl(buffer.toString());
+            } else {
+                item.photoUrl = buffer.toString();
             }
         } else if(localName.equals("type")) {
             thumbnailType = buffer.toString();
             setThumb();
         } else if(localName.equals("photo")) {
-            item.photos.add(photo);
+            if(isMain == true) {
+                item.photoUrl = this.photoUrl;
+                isMain = false;
+            }
+        } else if(localName.equals("is_main")) {
+            isMain = buffer.toString().equals("true");
         }
     }
     
@@ -62,7 +67,7 @@ public class ItemHandler extends DefaultHandler {
 
     protected void setThumb() {
         if(thumbnail == true && thumbnailType != null && thumbnailType.equals("thumb130")) {
-            photo.setThumbUrl(thumbnailUrl);
+            item.thumbUrl = thumbnailUrl;
             thumbnail = false;
         }
     }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Item {
     public String title;
     public String url;
-    
-    public ArrayList<Photo> photos;
+    public String photoUrl;
+    public String thumbUrl;
     
 }
