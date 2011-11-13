@@ -13,7 +13,8 @@
         android:alwaysDrawnWithCache="true"
         android:background="#000000" 
         android:animationCache="true" 
-        android:drawingCacheQuality="high"/>
+        android:drawingCacheQuality="high" 
+        android:visibility="invisible"/>
 	
 </RelativeLayout>
 
