@@ -108,13 +108,26 @@ public class Trecias extends Activity
             carbonInfo.setText(waste.carbonString());
             
             TextView titleView = (TextView) findViewById(R.id.title);
-            titleView.setText(item.title);
+            titleView.setText(shortenTitle(item.title));
         }
 
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
             // TODO Auto-generated method stub
             
+        }
+
+        private String shortenTitle(String title) {
+            // Cut to 40 chars, then truncate to complete words.
+            try {
+                String shortTitle = title.substring(0, 39);
+                int i = shortTitle.lastIndexOf(' ');
+                int j = shortTitle.lastIndexOf('-');
+                return shortTitle.substring(0, (i < j ? j : i)) + "...";
+            } catch (IndexOutOfBoundsException e) {
+                // Title shorter than 41 chars
+                return title;
+            }
         }
     }
 
