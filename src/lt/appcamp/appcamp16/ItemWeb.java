@@ -2,11 +2,12 @@ package lt.appcamp.appcamp16;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.graphics.Picture;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebView.PictureListener;
 
 public class ItemWeb extends Activity {
     private ProgressDialog progress;
@@ -25,16 +26,18 @@ public class ItemWeb extends Activity {
         webView.loadUrl(getIntent().getExtras().getString(URL_PARAM));
         
         progress = ProgressDialog.show(this, "", "Loading...", true);
-        
-        Handler handlerTimer = new Handler();
-        handlerTimer.postDelayed(new Runnable(){
-            public void run() {
-                ItemWeb.this.webView.setVisibility(View.VISIBLE);
-                ItemWeb.this.progress.dismiss();             
-            }
-         }, 3000);
-
-
+                
+        webView.setPictureListener(new WebPictureListener());
     }
+    
+    class WebPictureListener implements PictureListener {
+
+        @Override
+        public void onNewPicture(WebView view, Picture arg1) {
+            ItemWeb.this.webView.setVisibility(View.VISIBLE);
+            ItemWeb.this.progress.dismiss();             
+        }    
+    } 
+
 
 }

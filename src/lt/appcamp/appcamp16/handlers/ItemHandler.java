@@ -14,11 +14,11 @@ public class ItemHandler extends DefaultHandler {
     private Item item;
 
     private boolean thumbnail = false;
-    private String thumbnailUrl;
     private String thumbnailType;
+    private String tempString = null;
     private boolean isMain = false;
     private boolean photo = false;
-    private String photoUrl;
+    
 
     public void startElement(String namespaceURI, String localName,
                              String qName, Attributes atts) throws SAXException {
@@ -30,6 +30,7 @@ public class ItemHandler extends DefaultHandler {
             item = new Item();
             thumbnail = false;
             photo = false;
+            isMain = false;
         } else if(localName.equals("photo")) {
             photo = true;
         } else if(localName.equals("thumbnail")) {
@@ -49,26 +50,24 @@ public class ItemHandler extends DefaultHandler {
         } else if (localName.equals("size")) {
             item.size = buffer.toString();
         } else if(localName.equals("url")) {
-            if (thumbnail) {
-                thumbnailUrl = buffer.toString();
+            if (thumbnail && isMain && thumbnailType.equals("thumb130")) {
+                item.thumbUrl = buffer.toString();
             } else if (photo) {
-                item.photoUrl = buffer.toString();
+                tempString = buffer.toString();
             } else {
                 item.url = buffer.toString();
             }
         } else if(localName.equals("type")) {
-            if(thumbnail == true) {
+            if (thumbnail) {
                 thumbnailType = buffer.toString();
-            }
-        } else if(localName.equals("photo")) {
-            if(isMain == true) {
-                item.photoUrl = this.photoUrl;
-                isMain = false;
             }
         } else if(localName.equals("is_main")) {
             isMain = buffer.toString().equals("true");
+            if (isMain) {
+                item.photoUrl = tempString;
+            }
         } else if(localName.equals("thumbnail")) {
-            setThumb();
+            thumbnail = true;
         }
     }
     
@@ -80,11 +79,4 @@ public class ItemHandler extends DefaultHandler {
         return items;
     }
 
-    protected void setThumb() {
-        if(thumbnail == true && thumbnailType != null && thumbnailType.equals("thumb130")) {
-            item.thumbUrl = thumbnailUrl;
-        }
-        thumbnail = false;
-        thumbnailUrl = null;
-    }
 }
