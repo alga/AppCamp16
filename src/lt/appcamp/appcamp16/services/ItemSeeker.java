@@ -35,7 +35,7 @@ public class ItemSeeker {
         url += "?order=like_count";
 
         if (categoryId != null) {
-            url += "&category_id=" + categoryId.toString();
+            url += "&catalog_id=" + categoryId.toString();
         }
 
         Log.i(TAG, "url = " + url);

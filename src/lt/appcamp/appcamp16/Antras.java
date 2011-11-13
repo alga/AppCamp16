@@ -25,7 +25,7 @@ public class Antras extends Activity
         Gallery gal = (Gallery) findViewById(R.id.category_gallery);
         gal.setAdapter(new ImageAdapter(this));
         gal.setOnItemClickListener(new ClickListener(this));
-
+        gal.setSelection(1);
         //gal.setMaxRotationAngle(0);
         //gal.setMaxZoom(-100);
 
