@@ -57,7 +57,7 @@ public class Antras extends Activity
             ImageView imageView = new ImageView(mContext);
 
             imageView.setImageResource(categories.find().get(position).getView());
-            imageView.setLayoutParams(new Gallery.LayoutParams(120, 120));
+            imageView.setLayoutParams(new Gallery.LayoutParams(150, 150));
             imageView.setScaleType(ImageView.ScaleType.CENTER);
             imageView.setBackgroundResource(mGalleryItemBackground);
 
