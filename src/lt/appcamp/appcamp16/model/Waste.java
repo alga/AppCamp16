@@ -9,7 +9,7 @@ public class Waste {
     }
     
     public String carbonString() {
-        return Math.round(co2Kg * 10) / 10.0 + 10 + " kg";
+        return Math.round(co2Kg * 10) / 10.0 + " kg";
     }
     
     @Override
