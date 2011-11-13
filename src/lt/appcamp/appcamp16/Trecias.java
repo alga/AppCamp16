@@ -51,8 +51,6 @@ public class Trecias extends Activity
 
         categoryTitleView.setText((new CategoriesSeeker()).titleByIndex(category_id));
      
-        coverFlow.setSelection(1);
-        
         new LoadPhotoAdapter().execute();
     }
 
@@ -70,6 +68,7 @@ public class Trecias extends Activity
         protected void onPostExecute(PhotoAdapter adapter) {
             coverFlow.setAdapter(adapter);
             progress.dismiss();
+            coverFlow.setSelection(1);
         }
    }
     
