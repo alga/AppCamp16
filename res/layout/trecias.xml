@@ -20,7 +20,8 @@
 	    	android:layout_marginRight="20dp"
 	    	android:textColor="#a6a6a6"
 	    	android:text=""
-	    	android:textStyle="bold" 
+	    	android:antialias="true"
+		    android:textStyle="bold" 
 	    	android:typeface="sans"  
 	    	android:textSize="32sp"  
 	    	android:gravity="center"
@@ -33,19 +34,27 @@
 		    android:layout_weight="1"
 			/>
 		
-    	<LinearLayout
-		    android:orientation="vertical"
+    	<RelativeLayout
 		    android:layout_width="fill_parent"
 		    android:layout_height="fill_parent"
 		    android:layout_weight="1">
 		    
-	    	    
-    	    <LinearLayout
-			    android:orientation="vertical"
-			    android:layout_width="fill_parent"
-			    android:layout_height="fill_parent"
-			    android:layout_weight="1" />
-		    
+		    <TextView
+		    	android:id="@+id/title"
+		    	android:layout_width="fill_parent"
+		    	android:layout_height="wrap_content"
+		    	android:layout_alignParentLeft="true"
+		    	android:layout_marginLeft="20dp"
+		    	android:layout_marginRight="20dp"
+		    	android:layout_marginTop="30dp"
+		    	android:antialias="true"
+		    	android:textColor="#ffffff"
+		    	android:text=""
+		    	android:textStyle="bold" 
+		    	android:typeface="sans"  
+		    	android:textSize="24sp"  
+		    	android:gravity="center" />
+    	    
 		    <TextView
 		    	android:id="@+id/wasteInfo"
 		    	android:layout_width="fill_parent"
@@ -53,30 +62,13 @@
 		    	android:layout_alignParentLeft="true"
 		    	android:layout_marginLeft="20dp"
 		    	android:layout_marginRight="20dp"
-		    	android:textColor="#ffffff"
-		    	android:text=""
-		    	android:textStyle="bold" 
-		    	android:typeface="sans" />
-		    
-   		    <TextView
-		    	android:id="@+id/title"
-		    	android:layout_width="fill_parent"
-		    	android:layout_height="wrap_content"
-		    	android:layout_alignParentLeft="true"
-		    	android:layout_marginLeft="20dp"
-		    	android:layout_marginRight="20dp"
-		    	android:textColor="#ffffff"
+		    	android:antialias="true"
+		    	android:textColor="#1c632d"
 		    	android:text=""
 		    	android:textStyle="bold" 
 		    	android:typeface="sans" />
    		    
-   		    <LinearLayout
-			    android:orientation="vertical"
-			    android:layout_width="fill_parent"
-			    android:layout_height="fill_parent"
-			    android:layout_weight="1" />
-
-    	</LinearLayout>
+    	</RelativeLayout>
 		
 	</LinearLayout>
 	
