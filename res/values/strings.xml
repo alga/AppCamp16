@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Style Saver</string>
-    <string name="antras_name">Antras screenas</string>
-    <string name="trecias_name">Trečias screenas</string>
+    <string name="antras_name">Select Category</string>
+    <string name="trecias_name">View Items</string>
+    <string name="item_web_name">Item Profile</string>
 </resources>

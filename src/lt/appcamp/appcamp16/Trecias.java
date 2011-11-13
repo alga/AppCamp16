@@ -8,6 +8,7 @@ import lt.appcamp.appcamp16.utils.WasteCalculator;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,14 +19,16 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class Trecias extends Activity
 {
-    CoverFlow coverFlow;
+    private CoverFlow coverFlow;
+    private Integer category_id;
+
     public static final String CATEGORY_PARAM = "category_id";
-    Integer category_id;
 
     /** Called when the activity is first created. */
     @Override
@@ -34,7 +37,8 @@ public class Trecias extends Activity
         setContentView(R.layout.trecias);
         
         coverFlow = (CoverFlow) findViewById(R.id.gallery);
-
+        Button buttonMore = (Button) findViewById(R.id.buttonMore);
+        
         category_id = getIntent().getExtras().getInt(CATEGORY_PARAM);
         
         Log.i("Trecias","got category " + new Integer(category_id).toString());
@@ -43,12 +47,10 @@ public class Trecias extends Activity
         coverFlow.setSelection(4, true);
         coverFlow.setAnimationDuration(1000);
         
-        coverFlow.setOnItemClickListener(new ClickListener(this));
-        coverFlow.setOnItemSelectedListener(new SelectListener(this));
+        coverFlow.setOnItemClickListener(new ClickListener());
+        coverFlow.setOnItemSelectedListener(new SelectListener());
+        buttonMore.setOnClickListener(new ButtonMoreClickListener());
         
-        //ProgressDialog dialog = new ProgressDialog(getApplicationContext());
-        //dialog.show();
-        //ProgressDialog.show(this, null, "Loading...", true);
         
         findViewById(R.id.preview).setOnClickListener(new PreviewClickListener(this));
         TextView categoryTitleView = (TextView) findViewById(R.id.categoryTitle);
@@ -92,11 +94,6 @@ public class Trecias extends Activity
 
     
     private class SelectListener implements AdapterView.OnItemSelectedListener {
-
-        public SelectListener(Context c) {
-            
-        }
-        
         @Override
         public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
             // TODO Auto-generated method stub
@@ -114,19 +111,13 @@ public class Trecias extends Activity
             // TODO Auto-generated method stub
             
         }
-
-        
     }
+
+
+    
     
     private class ClickListener implements AdapterView.OnItemClickListener {
-
-        Context c;
-        
-        public ClickListener(Context c) {
-            this.c = c;
-        }
-
-        
+                
         public void onItemClick(AdapterView<?>  parent, View  v, int position, long id)         {
             Item item = (Item)parent.getItemAtPosition(position);
             
@@ -164,7 +155,7 @@ public class Trecias extends Activity
 
                 imageView.setImageBitmap(bitmap);
 
-                Animation fadeInAnimation = AnimationUtils.loadAnimation(c, R.anim.fade_in);
+                Animation fadeInAnimation = AnimationUtils.loadAnimation(Trecias.this, R.anim.fade_in);
 
                 preview.startAnimation(fadeInAnimation);                
                 preview.setVisibility(View.VISIBLE);
@@ -178,8 +169,20 @@ public class Trecias extends Activity
                 this.showDialog = showDialog;
             }
        }
+   }
+    
+    private class ButtonMoreClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Item item = (Item) coverFlow.getSelectedItem();
+            
+            Intent intent = new Intent(Trecias.this, ItemWeb.class);
+            intent.putExtra(ItemWeb.URL_PARAM, item.url);
+            startActivity(intent);            
+        }
 
    }
+    
     
    private class PreviewClickListener implements AdapterView.OnClickListener {
 
