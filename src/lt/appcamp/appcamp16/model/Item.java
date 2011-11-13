@@ -7,6 +7,7 @@ public class Item {
     public Integer id;
     public String title;
     public String url;
+    public Integer userId;
     public String photoUrl;
     public String thumbUrl;
     public Bitmap thumbBitmap;
