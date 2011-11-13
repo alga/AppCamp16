@@ -155,11 +155,17 @@
 			android:layout_height="fill_parent"
 			/>
 
-	    <Button
+	    <ImageView
 	        android:id="@+id/buttonMore"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="more..." />
+	        android:background="@drawable/more_button"
+	        android:height="32px"
+	        android:width="72px"
+	        android:layout_marginRight="10dip" 
+	        android:layout_marginBottom="10dip" 
+	        android:layout_alignParentRight="true" 
+	        android:layout_alignParentBottom="true"/>
 	    	    
 	  </RelativeLayout>
 
