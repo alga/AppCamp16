@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/products">
+    android:background="@drawable/products_example">
 
     <LinearLayout
 		    android:orientation="vertical"
@@ -14,15 +14,17 @@
 	    	android:layout_width="fill_parent"
 	    	android:layout_height="wrap_content"
 	    	android:layout_alignParentLeft="true"
-	    	android:layout_marginTop="10dp"
-	    	android:layout_marginBottom="10dp"
-	    	android:layout_marginLeft="20dp"
-	    	android:layout_marginRight="20dp"
-	    	android:textColor="#000000"
+	    	android:layout_marginTop="5dip"
+	    	android:layout_marginBottom="0dip"
+	    	android:layout_marginLeft="20dip"
+	    	android:layout_marginRight="20dip"
+	    	android:textColor="#a6a6a6"
 	    	android:text=""
-	    	android:textStyle="bold" 
+	    	android:antialias="true"
+		    android:textStyle="bold" 
 	    	android:typeface="sans"  
-	    	android:textSize="24sp"  
+	    	android:textSize="32sp"  
+	    	android:gravity="center"
 	    	/>
            		    
 		<lt.appcamp.appcamp16.ui.CoverFlow 
@@ -32,50 +34,113 @@
 		    android:layout_weight="1"
 			/>
 		
-    	<LinearLayout
-		    android:orientation="vertical"
+    	<RelativeLayout
 		    android:layout_width="fill_parent"
 		    android:layout_height="fill_parent"
 		    android:layout_weight="1">
 		    
-	    	    
-    	    <LinearLayout
-			    android:orientation="vertical"
-			    android:layout_width="fill_parent"
-			    android:layout_height="fill_parent"
-			    android:layout_weight="1" />
-		    
 		    <TextView
-		    	android:id="@+id/wasteInfo"
-		    	android:layout_width="fill_parent"
-		    	android:layout_height="wrap_content"
-		    	android:layout_alignParentLeft="true"
-		    	android:layout_marginLeft="20dp"
-		    	android:layout_marginRight="20dp"
-		    	android:textColor="#ffffff"
-		    	android:text=""
-		    	android:textStyle="bold" 
-		    	android:typeface="sans" />
-		    
-   		    <TextView
 		    	android:id="@+id/title"
 		    	android:layout_width="fill_parent"
 		    	android:layout_height="wrap_content"
 		    	android:layout_alignParentLeft="true"
-		    	android:layout_marginLeft="20dp"
-		    	android:layout_marginRight="20dp"
+		    	android:layout_marginLeft="20dip"
+		    	android:layout_marginRight="20dip"
+		    	android:layout_marginTop="30dip"
+		    	android:antialias="true"
 		    	android:textColor="#ffffff"
 		    	android:text=""
 		    	android:textStyle="bold" 
-		    	android:typeface="sans" />
-   		    
-   		    <LinearLayout
-			    android:orientation="vertical"
+		    	android:typeface="sans"  
+		    	android:textSize="24sp"  
+		    	android:gravity="center" />
+		    
+	        <LinearLayout
+			    android:orientation="horizontal"
 			    android:layout_width="fill_parent"
 			    android:layout_height="fill_parent"
-			    android:layout_weight="1" />
+			    android:layout_marginTop="110dip">
 
-    	</LinearLayout>
+	            <LinearLayout
+				    android:orientation="vertical"
+				    android:layout_width="fill_parent"
+				    android:layout_height="fill_parent"
+				    android:layout_weight="3">
+				    
+                    <TextView
+				    	android:layout_width="fill_parent"
+				    	android:layout_height="wrap_content"
+				    	android:layout_alignParentLeft="true"
+				    	android:layout_marginLeft="20dip"
+				    	android:layout_marginRight="20dip"
+				    	android:antialias="true"
+				    	android:textColor="#1c632d"
+				    	android:gravity="center"
+				    	android:text="H₂O"
+				    	android:textStyle="bold" 
+				    	android:typeface="sans"
+				    	android:textSize="24sp"
+				    	/>
+                    
+                   	<TextView
+				    	android:id="@+id/waterInfo"
+				    	android:layout_width="fill_parent"
+				    	android:layout_height="wrap_content"
+				    	android:layout_alignParentLeft="true"
+				    	android:layout_marginLeft="20dip"
+				    	android:layout_marginRight="20dip"
+				    	android:antialias="true"
+				    	android:textColor="#1c632d"
+				    	android:gravity="center"
+				    	android:text=""
+				    	android:textStyle="bold" 
+				    	android:typeface="sans"
+				    	android:textSize="36sp" />
+	            
+	            </LinearLayout>
+	            
+	                
+	            <LinearLayout
+				    android:orientation="vertical"
+				    android:layout_width="fill_parent"
+				    android:layout_height="fill_parent"
+				    android:layout_weight="3">
+				    
+                    <TextView
+				    	android:layout_width="fill_parent"
+				    	android:layout_height="wrap_content"
+				    	android:layout_alignParentLeft="true"
+				    	android:layout_marginLeft="20dip"
+				    	android:layout_marginRight="20dip"
+				    	android:antialias="true"
+				    	android:textColor="#1c632d"
+				    	android:gravity="center"
+				    	android:text="CO₂"
+				    	android:textStyle="bold" 
+				    	android:typeface="sans"
+				    	android:textSize="24sp"
+				    	/>
+                    
+                   	<TextView
+				    	android:id="@+id/carbonInfo"
+				    	android:layout_width="fill_parent"
+				    	android:layout_height="wrap_content"
+				    	android:layout_alignParentLeft="true"
+				    	android:layout_marginLeft="20dip"
+				    	android:layout_marginRight="20dip"
+				    	android:antialias="true"
+				    	android:textColor="#1c632d"
+				    	android:gravity="center"
+				    	android:text=""
+				    	android:textStyle="bold" 
+				    	android:typeface="sans"
+				    	android:textSize="36sp" />
+	            
+	            </LinearLayout>
+
+			</LinearLayout>
+   		    
+    	</RelativeLayout>
 		
 	</LinearLayout>
 	
@@ -85,6 +150,7 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:layout_centerInParent="true"
+	    android:background="#000000"
 	    android:visibility="gone"
 	    >
 	    

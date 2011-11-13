@@ -30,7 +30,6 @@ public class ItemSeeker {
     }
 
     public ArrayList<Item> find(Context context) {
-        
         String xml = getXml(context);
         ArrayList<Item> items = new XmlParser().parseItemResponse(xml);
         postProcessItems(items);
@@ -51,7 +50,7 @@ public class ItemSeeker {
             url += "?order=like_count";
     
             if (categoryId != null) {
-                url += "&category_id=" + categoryId.toString();
+                url += "&catalog_id=" + categoryId.toString();
             }
     
             Log.i(TAG, "url = " + url);
