@@ -18,7 +18,7 @@ public class Splash extends Activity {
         new Handler().postDelayed(new Runnable(){
             public void run() {
                 finish();
-                startActivity(new Intent("lt.appcamp.appcamp16.Antras"));
+                startActivity(new Intent(Splash.this, Antras.class));
             }
         }, _splashTime);
     }
