@@ -25,7 +25,7 @@ public class PhotoAdapter extends BaseAdapter {
         TypedArray attr = context.obtainStyledAttributes(R.styleable.ProductsGallery);
         attr.recycle();
 
-        items = new ItemSeeker(category_id).find();
+        items = new ItemSeeker(category_id).find(context);
     }
 
 
