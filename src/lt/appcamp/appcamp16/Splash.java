@@ -7,7 +7,7 @@ import android.os.Handler;
  
 public class Splash extends Activity {
 
-    protected int _splashTime = 1000; // time to display the splash screen in ms
+    protected int _splashTime = 4000; // time to display the splash screen in ms
     
     /** Called when the activity is first created. */
     @Override
