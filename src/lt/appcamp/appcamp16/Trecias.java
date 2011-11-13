@@ -20,7 +20,6 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,7 +37,7 @@ public class Trecias extends Activity
         setContentView(R.layout.trecias);
         
         coverFlow = (CoverFlow) findViewById(R.id.gallery);
-        Button buttonMore = (Button) findViewById(R.id.buttonMore);
+        ImageView buttonMore = (ImageView) findViewById(R.id.buttonMore);
         
         category_id = getIntent().getExtras().getInt(CATEGORY_PARAM);
         
