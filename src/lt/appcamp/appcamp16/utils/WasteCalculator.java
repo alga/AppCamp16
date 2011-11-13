@@ -16,7 +16,7 @@ public class WasteCalculator {
             avgPrice = item.category.getAvgPrice();
             avgWeight = item.category.getAvgWeight();
         }
-        result.waterLiters = avgPrice.doubleValue() * randomCoeff;
+        result.waterLiters = avgPrice.doubleValue() * 34.5 * randomCoeff;
 
         result.co2Kg = avgWeight * 20 * randomCoeff;
         
