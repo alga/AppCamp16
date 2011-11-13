@@ -3,6 +3,7 @@ package lt.appcamp.appcamp16;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import lt.appcamp.appcamp16.model.Item;
+import lt.appcamp.appcamp16.model.Waste;
 import lt.appcamp.appcamp16.services.CategoriesSeeker;
 import lt.appcamp.appcamp16.services.PhotoAdapter;
 import lt.appcamp.appcamp16.ui.CoverFlow;
@@ -95,9 +96,13 @@ public class Trecias extends Activity
                 long id) {
             // TODO Auto-generated method stub
             Item item = (Item) parent.getSelectedItem();
+            Waste waste = WasteCalculator.calculate(item);
             
-            TextView wasteInfo = (TextView) findViewById(R.id.wasteInfo);
-            wasteInfo.setText(WasteCalculator.calculate(item).toString());
+            TextView wasteInfo = (TextView) findViewById(R.id.waterInfo);
+            wasteInfo.setText(waste.waterString());
+            
+            TextView carbonInfo = (TextView) findViewById(R.id.carbonInfo);
+            carbonInfo.setText(waste.carbonString());
             
             TextView titleView = (TextView) findViewById(R.id.title);
             titleView.setText(item.title);
