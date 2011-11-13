@@ -54,7 +54,7 @@ public class Trecias extends Activity
 
         categoryTitleView.setText((new CategoriesSeeker()).titleByIndex(category_id));
      
-        coverFlow.setSelection(1);
+        //coverFlow.setSelection(1);
         
         new LoadPhotoAdapter().execute();
     }
@@ -139,7 +139,7 @@ public class Trecias extends Activity
         }
         
         class LoadSinglePhotoTask extends AsyncTask<Object, Void, Void> {
-            ProgressDialog progress;
+            private ProgressDialog progress;
             
             @Override
             protected void onPreExecute() {
@@ -157,10 +157,11 @@ public class Trecias extends Activity
                 
                 
                 imageView.setImageBitmap(item.getPhotoBitmap());
+                
                 Animation fadeInAnimation = AnimationUtils.loadAnimation(c, R.anim.fade_in);
 
                 preview.startAnimation(fadeInAnimation);
-                preview.setVisibility(View.VISIBLE);
+                //preview.setVisibility(View.VISIBLE);
                 return null;
             }
 
