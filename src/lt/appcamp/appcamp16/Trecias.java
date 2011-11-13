@@ -100,7 +100,7 @@ public class Trecias extends Activity
             wasteInfo.setText(WasteCalculator.calculate(item).toString());
             
             TextView titleView = (TextView) findViewById(R.id.title);
-            titleView.setText(item.title);
+            titleView.setText(shortenTitle(item.title));
         }
 
         @Override
@@ -109,7 +109,18 @@ public class Trecias extends Activity
             
         }
 
-        
+        private String shortenTitle(String title) {
+            // Cut to 40 chars, then truncate to complete words.
+            try {
+                String shortTitle = title.substring(0, 39);
+                int i = shortTitle.lastIndexOf(' ');
+                int j = shortTitle.lastIndexOf('-');
+                return shortTitle.substring(0, (i < j ? j : i)) + "...";
+            } catch (IndexOutOfBoundsException e) {
+                // Title shorter than 41 chars
+                return title;
+            }
+        }
     }
     
     private class ClickListener implements AdapterView.OnItemClickListener {
