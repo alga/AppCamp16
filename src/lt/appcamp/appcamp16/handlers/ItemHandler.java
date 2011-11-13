@@ -40,11 +40,11 @@ public class ItemHandler extends DefaultHandler {
     
     public void endElement(String uri, String localName, String qName) throws SAXException {
         if(localName.equals("item")) {
-            if(item.photoUrl != null && !item.photoUrl.isEmpty()) {
-                items.add(item);
-            }
-        } else if(localName.equals("title")) {
+            items.add(item);
+        } else if (localName.equals("title")) {
             item.title = buffer.toString();
+        } else if (localName.equals("user_id")) {
+            item.userId = Integer.parseInt(buffer.toString());
         } else if (localName.equals("id")) {
             item.id = Integer.parseInt(buffer.toString());
         } else if (localName.equals("size")) {

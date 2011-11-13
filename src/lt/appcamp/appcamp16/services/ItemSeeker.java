@@ -1,13 +1,15 @@
 package lt.appcamp.appcamp16.services;
 
-import android.content.Context;
-import lt.appcamp.appcamp16.model.Category;
-import lt.appcamp.appcamp16.model.Item;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Date;
 
+import lt.appcamp.appcamp16.model.Category;
+import lt.appcamp.appcamp16.model.Item;
+import android.content.Context;
 import android.util.Log;
 
 public class ItemSeeker {
@@ -31,15 +33,22 @@ public class ItemSeeker {
 
     public ArrayList<Item> find(Context context) {
         String xml = getXml(context);
-        ArrayList<Item> items = new XmlParser().parseItemResponse(xml);
-        postProcessItems(items);
+        items = new XmlParser().parseItemResponse(xml);
+        postProcessItems();
         return items;
     }
 
-    private void postProcessItems(ArrayList<Item> items) {
+    private void postProcessItems() {
+        ArrayList<Item> result = new ArrayList<Item>();
+        
         for (Item item : items) {
             item.category = this.category;
+            if (item.photoUrl != null && item.thumbUrl != null && item.userId != null && item.userId.compareTo(9149) != 0) {
+                result.add(item);
+            }
         }
+        
+        items = result;
     }
     
     private String getXml(Context context) {
