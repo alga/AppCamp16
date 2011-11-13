@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/products_example">
+    android:background="@drawable/products">
 
     <LinearLayout
 		    android:orientation="vertical"
@@ -14,11 +14,11 @@
 	    	android:layout_width="fill_parent"
 	    	android:layout_height="wrap_content"
 	    	android:layout_alignParentLeft="true"
-	    	android:layout_marginTop="5dp"
-	    	android:layout_marginBottom="0dp"
-	    	android:layout_marginLeft="20dp"
-	    	android:layout_marginRight="20dp"
-	    	android:textColor="#a6a6a6"
+	    	android:layout_marginTop="20dip"
+	    	android:layout_marginBottom="0dip"
+	    	android:layout_marginLeft="20dip"
+	    	android:layout_marginRight="20dip"
+	    	android:textColor="#1c632d"
 	    	android:text=""
 	    	android:antialias="true"
 		    android:textStyle="bold" 
@@ -44,9 +44,9 @@
 		    	android:layout_width="fill_parent"
 		    	android:layout_height="wrap_content"
 		    	android:layout_alignParentLeft="true"
-		    	android:layout_marginLeft="20dp"
-		    	android:layout_marginRight="20dp"
-		    	android:layout_marginTop="30dp"
+		    	android:layout_marginLeft="20dip"
+		    	android:layout_marginRight="20dip"
+		    	android:layout_marginTop="35dip"
 		    	android:antialias="true"
 		    	android:textColor="#ffffff"
 		    	android:text=""
@@ -54,19 +54,85 @@
 		    	android:typeface="sans"  
 		    	android:textSize="24sp"  
 		    	android:gravity="center" />
-    	    
-		    <TextView
-		    	android:id="@+id/wasteInfo"
-		    	android:layout_width="fill_parent"
-		    	android:layout_height="wrap_content"
-		    	android:layout_alignParentLeft="true"
-		    	android:layout_marginLeft="20dp"
-		    	android:layout_marginRight="20dp"
-		    	android:antialias="true"
-		    	android:textColor="#1c632d"
-		    	android:text=""
-		    	android:textStyle="bold" 
-		    	android:typeface="sans" />
+		    
+	        <LinearLayout
+			    android:orientation="horizontal"
+			    android:layout_width="fill_parent"
+			    android:layout_height="fill_parent"
+			    android:layout_marginTop="120dip">
+
+	            <LinearLayout
+				    android:orientation="vertical"
+				    android:layout_width="fill_parent"
+				    android:layout_height="fill_parent"
+				    android:layout_marginLeft="20dip"
+				   	android:layout_weight="1">
+				    
+                    <TextView
+				    	android:layout_width="fill_parent"
+				    	android:layout_height="wrap_content"
+				    	android:layout_alignParentLeft="true"
+				    	android:antialias="true"
+				    	android:textColor="#1c632d"
+				    	android:gravity="center"
+				    	android:text="H₂O"
+				    	android:textStyle="bold" 
+				    	android:typeface="sans"
+				    	android:textSize="24sp"
+				    	/>
+                    
+                   	<TextView
+				    	android:id="@+id/waterInfo"
+				    	android:layout_width="fill_parent"
+				    	android:layout_height="wrap_content"
+				    	android:layout_alignParentLeft="true"
+				    	android:antialias="true"
+				    	android:textColor="#1c632d"
+				    	android:gravity="center"
+				    	android:text=""
+				    	android:textStyle="bold" 
+				    	android:typeface="sans"
+				    	android:textSize="36sp" />
+	            
+	            </LinearLayout>
+	            
+	                
+	            <LinearLayout
+				    android:orientation="vertical"
+				    android:layout_width="fill_parent"
+				    android:layout_height="fill_parent"
+				    android:layout_marginRight="20dip"
+				    android:layout_weight="1">
+				    
+                    <TextView
+				    	android:layout_width="fill_parent"
+				    	android:layout_height="wrap_content"
+				    	android:layout_alignParentLeft="true"
+				    	android:antialias="true"
+				    	android:textColor="#1c632d"
+				    	android:gravity="center"
+				    	android:text="CO₂"
+				    	android:textStyle="bold" 
+				    	android:typeface="sans"
+				    	android:textSize="24sp"
+				    	/>
+                    
+                   	<TextView
+				    	android:id="@+id/carbonInfo"
+				    	android:layout_width="fill_parent"
+				    	android:layout_height="wrap_content"
+				    	android:layout_alignParentLeft="true"
+				    	android:antialias="true"
+				    	android:textColor="#1c632d"
+				    	android:gravity="center"
+				    	android:text=""
+				    	android:textStyle="bold" 
+				    	android:typeface="sans"
+				    	android:textSize="36sp" />
+	            
+	            </LinearLayout>
+
+			</LinearLayout>
    		    
     	</RelativeLayout>
 		
