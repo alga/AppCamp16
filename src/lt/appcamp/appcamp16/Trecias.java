@@ -1,31 +1,35 @@
 package lt.appcamp.appcamp16;
 
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import lt.appcamp.appcamp16.model.Item;
+import lt.appcamp.appcamp16.model.Waste;
 import lt.appcamp.appcamp16.services.CategoriesSeeker;
 import lt.appcamp.appcamp16.services.PhotoAdapter;
 import lt.appcamp.appcamp16.ui.CoverFlow;
 import lt.appcamp.appcamp16.utils.WasteCalculator;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.Typeface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.util.Log;
 
 public class Trecias extends Activity
 {
-    CoverFlow coverFlow;
+    private CoverFlow coverFlow;
+    private Integer category_id;
+
     public static final String CATEGORY_PARAM = "category_id";
-    Integer category_id;
 
     /** Called when the activity is first created. */
     @Override
@@ -34,7 +38,8 @@ public class Trecias extends Activity
         setContentView(R.layout.trecias);
         
         coverFlow = (CoverFlow) findViewById(R.id.gallery);
-
+        Button buttonMore = (Button) findViewById(R.id.buttonMore);
+        
         category_id = getIntent().getExtras().getInt(CATEGORY_PARAM);
         
         Log.i("Trecias","got category " + new Integer(category_id).toString());
@@ -43,14 +48,18 @@ public class Trecias extends Activity
         coverFlow.setSelection(4, true);
         coverFlow.setAnimationDuration(1000);
         
-        coverFlow.setOnItemClickListener(new ClickListener(this));
-        coverFlow.setOnItemSelectedListener(new SelectListener(this));
+        coverFlow.setOnItemClickListener(new ClickListener());
+        coverFlow.setOnItemSelectedListener(new SelectListener());
+        buttonMore.setOnClickListener(new ButtonMoreClickListener());
+        
         
         findViewById(R.id.preview).setOnClickListener(new PreviewClickListener(this));
         TextView categoryTitleView = (TextView) findViewById(R.id.categoryTitle);
 
         categoryTitleView.setText((new CategoriesSeeker()).titleByIndex(category_id));
      
+        coverFlow.setSelection(1);
+        
         new LoadPhotoAdapter().execute();
     }
 
@@ -84,20 +93,19 @@ public class Trecias extends Activity
         return super.onKeyDown(keyCode, event);
     }
 
+    
     private class SelectListener implements AdapterView.OnItemSelectedListener {
-
-        public SelectListener(Context c) {
-            
-        }
-        
         @Override
-        public void onItemSelected(AdapterView<?> parent, View v, int position,
-                long id) {
+        public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
             // TODO Auto-generated method stub
             Item item = (Item) parent.getSelectedItem();
+            Waste waste = WasteCalculator.calculate(item);
             
-            TextView wasteInfo = (TextView) findViewById(R.id.wasteInfo);
-            wasteInfo.setText(WasteCalculator.calculate(item).toString());
+            TextView wasteInfo = (TextView) findViewById(R.id.waterInfo);
+            wasteInfo.setText(waste.waterString());
+            
+            TextView carbonInfo = (TextView) findViewById(R.id.carbonInfo);
+            carbonInfo.setText(waste.carbonString());
             
             TextView titleView = (TextView) findViewById(R.id.title);
             titleView.setText(shortenTitle(item.title));
@@ -122,32 +130,77 @@ public class Trecias extends Activity
             }
         }
     }
+
+
+    
     
     private class ClickListener implements AdapterView.OnItemClickListener {
-
-        Context c;
-        
-        public ClickListener(Context c) {
-            this.c = c;
+                
+        public void onItemClick(AdapterView<?>  parent, View  v, int position, long id)         {
+            Item item = (Item)parent.getItemAtPosition(position);
+            
+            LoadSinglePhotoTask task = new LoadSinglePhotoTask();
+            task.setShowDialog(item.photoBitmap == null);
+            task.execute(item);
         }
-
-        public void  onItemClick(AdapterView<?>  parent, View  v, int position, long id)         {
-            Item item = (Item)parent.getSelectedItem();
-            
-            View preview = findViewById(R.id.preview);
-            ImageView imageView = (ImageView)findViewById(R.id.previewImage);
-            
-            imageView.setScaleType(ImageView.ScaleType.CENTER);
-            imageView.setImageBitmap(item.getPhotoBitmap());
-            
         
-            Animation fadeInAnimation = AnimationUtils.loadAnimation(c, R.anim.fade_in);
-
-            preview.startAnimation(fadeInAnimation);
-            preview.setVisibility(View.VISIBLE);
+        class LoadSinglePhotoTask extends AsyncTask<Object, Void, Void> {
+            private ProgressDialog progress;
+            private boolean showDialog = true;
+            private Bitmap bitmap = null;
             
-        }
+            @Override
+            protected void onPreExecute() {
+                if (showDialog) {
+                    this.progress = ProgressDialog.show(Trecias.this, "", "Loading...", true);
+                }
+                ImageView imageView = (ImageView)findViewById(R.id.previewImage);
+                imageView.setScaleType(ImageView.ScaleType.CENTER);
+            }
+
+            @Override
+            protected Void doInBackground(Object... objs) {
+                Item item = (Item) objs[0];
+                
+                bitmap = item.getPhotoBitmap();
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void adapter) {
+                ImageView imageView = (ImageView)findViewById(R.id.previewImage);
+                View preview = findViewById(R.id.preview);
+
+                imageView.setImageBitmap(bitmap);
+
+                Animation fadeInAnimation = AnimationUtils.loadAnimation(Trecias.this, R.anim.fade_in);
+
+                preview.startAnimation(fadeInAnimation);                
+                preview.setVisibility(View.VISIBLE);
+                if (progress != null) {
+                    progress.dismiss();
+                }
+            }
+
+
+            public void setShowDialog(boolean showDialog) {
+                this.showDialog = showDialog;
+            }
+       }
    }
+    
+    private class ButtonMoreClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Item item = (Item) coverFlow.getSelectedItem();
+            
+            Intent intent = new Intent(Trecias.this, ItemWeb.class);
+            intent.putExtra(ItemWeb.URL_PARAM, item.url);
+            startActivity(intent);            
+        }
+
+   }
+    
     
    private class PreviewClickListener implements AdapterView.OnClickListener {
 

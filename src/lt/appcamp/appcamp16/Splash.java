@@ -7,7 +7,7 @@ import android.os.Handler;
  
 public class Splash extends Activity {
 
-    protected int _splashTime = 1000; // time to display the splash screen in ms
+    protected int _splashTime = 4000; // time to display the splash screen in ms
     
     /** Called when the activity is first created. */
     @Override
@@ -18,7 +18,7 @@ public class Splash extends Activity {
         new Handler().postDelayed(new Runnable(){
             public void run() {
                 finish();
-                startActivity(new Intent("lt.appcamp.appcamp16.Antras"));
+                startActivity(new Intent(Splash.this, Antras.class));
             }
         }, _splashTime);
     }

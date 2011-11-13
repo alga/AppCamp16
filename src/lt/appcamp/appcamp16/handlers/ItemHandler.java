@@ -17,6 +17,7 @@ public class ItemHandler extends DefaultHandler {
     private String thumbnailUrl;
     private String thumbnailType;
     private boolean isMain = false;
+    private boolean photo = false;
     private String photoUrl;
 
     public void startElement(String namespaceURI, String localName,
@@ -27,6 +28,10 @@ public class ItemHandler extends DefaultHandler {
             items = new ArrayList<Item>();
         } else if(localName.equals("item")) {
             item = new Item();
+            thumbnail = false;
+            photo = false;
+        } else if(localName.equals("photo")) {
+            photo = true;
         } else if(localName.equals("thumbnail")) {
             thumbnail = true;
         }
@@ -44,10 +49,12 @@ public class ItemHandler extends DefaultHandler {
         } else if (localName.equals("size")) {
             item.size = buffer.toString();
         } else if(localName.equals("url")) {
-            if(thumbnail == true) {
+            if (thumbnail) {
                 thumbnailUrl = buffer.toString();
-            } else {
+            } else if (photo) {
                 item.photoUrl = buffer.toString();
+            } else {
+                item.url = buffer.toString();
             }
         } else if(localName.equals("type")) {
             if(thumbnail == true) {
