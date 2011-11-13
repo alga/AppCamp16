@@ -3,11 +3,13 @@ package lt.appcamp.appcamp16;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import lt.appcamp.appcamp16.model.Item;
+import lt.appcamp.appcamp16.services.CategoriesSeeker;
 import lt.appcamp.appcamp16.services.PhotoAdapter;
 import lt.appcamp.appcamp16.ui.CoverFlow;
 import lt.appcamp.appcamp16.utils.WasteCalculator;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -30,10 +32,11 @@ public class Trecias extends Activity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trecias);
-
+        
         coverFlow = (CoverFlow) findViewById(R.id.gallery);
 
         category_id = getIntent().getExtras().getInt(CATEGORY_PARAM);
+        
         Log.i("Trecias","got category " + new Integer(category_id).toString());
 
         coverFlow.setSpacing(-25);
@@ -45,8 +48,9 @@ public class Trecias extends Activity
         
         findViewById(R.id.preview).setOnClickListener(new PreviewClickListener(this));
         TextView categoryTitleView = (TextView) findViewById(R.id.categoryTitle);
-        categoryTitleView.setText("Kategorijos pavadinimas");
-        
+
+        categoryTitleView.setText((new CategoriesSeeker()).titleByIndex(category_id));
+     
         new LoadPhotoAdapter().execute();
     }
 
@@ -64,6 +68,7 @@ public class Trecias extends Activity
         protected void onPostExecute(PhotoAdapter adapter) {
             coverFlow.setAdapter(adapter);
             progress.dismiss();
+            coverFlow.setSelection(1);
         }
    }
     

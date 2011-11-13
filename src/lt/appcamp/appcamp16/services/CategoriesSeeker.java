@@ -39,4 +39,15 @@ public class CategoriesSeeker {
     public int idByIndex(int index) {
         return categories.get(index).getId().intValue();
     }
+    
+    public String titleByIndex(int id) {
+        for(int i=0; i<categories.size(); i++) {
+            Category c = categories.get(i);
+            if(c.getId() == id) {
+                return c.getTitle();
+            }
+        }
+
+        return null;
+    }
 }
